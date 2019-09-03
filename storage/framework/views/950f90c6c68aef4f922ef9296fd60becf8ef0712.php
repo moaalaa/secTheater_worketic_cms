@@ -66,7 +66,7 @@
                             </fieldset>
                             <?php echo Form::close(); ?>
 
-                            <a href="javascript:void(0);" v-if="this.is_show" @click="deleteChecked('<?php echo e(trans('lang.ph_delete_confirm_title')); ?>', '<?php echo e(trans('lang.ph_post_delete_message')); ?>')" class="wt-skilldel">
+                            <a href="javascript:void(0);" v-if="this.is_show" @click="deleteChecked('<?php echo e(trans('lang.ph_delete_confirm_title')); ?>', '<?php echo e(trans('lang.ph_post_delete_message')); ?>', '<?php echo e(route('admin.posts.multi-delete')); ?>',  '<?php echo e(route('admin.posts.adminIndex')); ?>', false)" class="wt-skilldel">
                                 <i class="lnr lnr-trash"></i>
                                 <span><?php echo e(trans('lang.del_select_rec')); ?></span>
                             </a>
@@ -102,7 +102,7 @@
                                                         <a href="<?php echo e(url('admin/posts/edit-posts')); ?>/<?php echo e($post->id); ?>" class="wt-addinfo wt-skillsaddinfo">
                                                             <i class="lnr lnr-pencil"></i>
                                                         </a>
-                                                        <delete :title="'<?php echo e(trans("lang.ph_delete_confirm_title")); ?>'" :id="'<?php echo e($post->id); ?>'" :message="'<?php echo e(trans("lang.ph_post_delete_message")); ?>'" :url="'<?php echo e(url('admin/posts/delete-posts')); ?>'"></delete>
+                                                        <delete :title="'<?php echo e(trans("lang.ph_delete_confirm_title")); ?>'" :id="'<?php echo e($post->id); ?>'" :message="'<?php echo e(trans("lang.ph_post_delete_message")); ?>'" :url="'<?php echo e(route('admin.posts.destroy')); ?>'"></delete>
                                                     </div>
                                                 </td>
                                             </tr>

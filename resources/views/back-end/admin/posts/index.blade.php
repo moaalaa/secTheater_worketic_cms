@@ -60,7 +60,7 @@
                                 </div>
                             </fieldset>
                             {!! Form::close() !!}
-                            <a href="javascript:void(0);" v-if="this.is_show" @click="deleteChecked('{{ trans('lang.ph_delete_confirm_title') }}', '{{ trans('lang.ph_post_delete_message') }}')" class="wt-skilldel">
+                            <a href="javascript:void(0);" v-if="this.is_show" @click="deleteChecked('{{ trans('lang.ph_delete_confirm_title') }}', '{{ trans('lang.ph_post_delete_message') }}', '{{ route('admin.posts.multi-delete') }}',  '{{ route('admin.posts.adminIndex')  }}', false)" class="wt-skilldel">
                                 <i class="lnr lnr-trash"></i>
                                 <span>{{ trans('lang.del_select_rec') }}</span>
                             </a>
@@ -83,7 +83,7 @@
                                     <tbody>
                                         @php $counter = 0; @endphp
                                         @foreach ($posts as $post)
-                                            <tr class="del-{{{ $post->id }}}">
+                                            <tr class="del-{{ $post->id }}">
                                                 <td>
                                                     <span class="wt-checkbox">
                                                         <input name="posts[]" @click="selectRecord" value="{{{ $post->id }}}" id="wt-check-{{{ $counter }}}" type="checkbox" name="head">
@@ -96,7 +96,7 @@
                                                         <a href="{{{ url('admin/posts/edit-posts') }}}/{{{ $post->id }}}" class="wt-addinfo wt-skillsaddinfo">
                                                             <i class="lnr lnr-pencil"></i>
                                                         </a>
-                                                        <delete :title="'{{trans("lang.ph_delete_confirm_title")}}'" :id="'{{ $post->id     }}'" :message="'{{trans("lang.ph_post_delete_message")}}'" :url="'{{url('admin/posts/delete-posts')}}'"></delete>
+                                                        <delete :title="'{{trans("lang.ph_delete_confirm_title")}}'" :id="'{{ $post->id }}'" :message="'{{trans("lang.ph_post_delete_message")}}'" :url="'{{ route('admin.posts.destroy') }}'"></delete>
                                                     </div>
                                                 </td>
                                             </tr>

@@ -109,9 +109,28 @@ class PostsController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Request $request)
     {
-        //
+        $json = [];
+
+        if ($request->has('id')) {
+            $post = Post::find($request->id);
+
+            if (!! $post) {
+                $post->delete();
+                $json['type'] = 'success';
+                $json['message'] = trans('lang.data-deleted');
+                return $json;
+            }
+
+            $json['type'] = 'error';
+            $json['message'] = trans('lang.something_wrong');
+            return $json;
+        }
+
+        $json['type'] = 'error';
+        $json['message'] = trans('lang.something_wrong');
+        return $json;
     }
 
     /**
@@ -123,25 +142,17 @@ class PostsController extends Controller
      */
     public function deleteSelected(Request $request)
     {
-        $server = Helper::worketicIsDemoSiteAjax();
-        if (!empty($server)) {
-            $json['type'] = 'error';
-            $json['message'] = $server->getData()->message;
-            return $json;
-        }
-        $json = array();
-        $checked = $request['ids'];
-        foreach ($checked as $id) {
-            $this->category::where("id", $id)->delete();
-        }
-        if (!empty($checked)) {
+        $json = [];
+        
+        if ($request->has('ids')) {
+            Post::destroy($request->ids);
             $json['type'] = 'success';
-            $json['message'] = trans('lang.cat_deleted');
-            return $json;
-        } else {
-            $json['type'] = 'error';
-            $json['message'] = trans('lang.something_wrong');
+            $json['message'] = trans('lang.data-deleted');
             return $json;
         }
+
+        $json['type'] = 'error';
+        $json['message'] = trans('lang.something_wrong');
+        return $json;
     }
 }

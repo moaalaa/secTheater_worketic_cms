@@ -1108,4 +1108,6 @@ return [
     'body' => 'Body',
     'add_post' => 'Add Post',
     'data-saved' => 'Data Saved',
+    'data-deleted' => 'Data Deleted',
+    'ph_post_delete_message' => 'Post Deleted',
 ];

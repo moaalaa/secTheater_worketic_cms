@@ -990,11 +990,22 @@ if (document.getElementById("cat-list")) {
                     this.is_show = false;
                 }
             },
-            deleteChecked: function (msg, text) {
+            deleteChecked: function (msg, text, url = '/admin/delete-checked-cats', redirectUrl = '/admin/categories', useAppPath = true) {
                 var deleteIDs = jQuery("#checked-val input:checkbox:checked").map(function () {
                     return jQuery(this).val();
                 }).get();
-                console.log(deleteIDs);
+
+                var fullUrl = '';
+                var fullRedirectUrl = '';
+
+                if (useAppPath) {
+                    fullUrl = APP_URL + url;
+                    fullRedirectUrl = APP_URL + redirectUrl;
+                } else {
+                    fullUrl = url;
+                    fullRedirectUrl = redirectUrl;
+                }
+
                 var self = this;
                 this.$swal({
                     title: msg,
@@ -1010,7 +1021,7 @@ if (document.getElementById("cat-list")) {
                 }).then((result) => {
                     var self = this;
                     if (result.value) {
-                        axios.post(APP_URL + '/admin/delete-checked-cats', {
+                        axios.post(fullUrl, {
                             ids: deleteIDs
                         })
                             .then(function (response) {
@@ -1022,7 +1033,7 @@ if (document.getElementById("cat-list")) {
                                             type: "success"
                                         })
                                     }, 500);
-                                    window.location.replace(APP_URL + '/admin/categories');
+                                    window.location.replace(fullRedirectUrl);
                                 } else {
                                     self.showError(response.data.message);
                                 }

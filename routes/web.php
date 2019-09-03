@@ -88,13 +88,15 @@ Route::middleware('role:user')->group(function () {
 });
 
 // User Posts Routes
-Route::resource('/posts', 'PostsController')->except(['create', 'store']);
+Route::resource('/posts', 'PostsController')->only(['index', 'show']);
 
 // Admin Posts Routes
 Route::middleware('role:admin')->group(function () {
     Route::get('/admin/posts/search', 'PostsController@adminIndex')->name('admin.posts.adminIndex');
     Route::get('/admin/posts', 'PostsController@adminIndex')->name('admin.posts.adminIndex');
-    // Route::get('/admin/posts', 'PostsController@store')->name('admin.posts.store');
+
+    Route::post('/admin/posts/delete', 'PostsController@destroy')->name('admin.posts.destroy');
+    Route::post('/admin/posts/multi-delete', 'PostsController@deleteSelected')->name('admin.posts.multi-delete');
     Route::post('/admin/posts', 'PostsController@store')->name('admin.posts.store');
 });
 
