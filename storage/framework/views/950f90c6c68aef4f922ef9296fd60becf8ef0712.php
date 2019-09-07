@@ -127,11 +127,7 @@
                                 
                             </div>
                         <?php else: ?>
-                            <?php if(file_exists(resource_path('views/extend/errors/no-record.blade.php'))): ?> 
-                                <?php echo $__env->make('extend.errors.no-record', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-                            <?php else: ?> 
-                                <?php echo $__env->make('errors.no-record', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-                            <?php endif; ?>
+                            <?php echo $__env->make('errors.no-record', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -140,4 +136,4 @@
     </div>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make(file_exists(resource_path('views/extend/back-end/master.blade.php')) ? 'extend.back-end.master' : 'back-end.master', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('back-end.master', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>

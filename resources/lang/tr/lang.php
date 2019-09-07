@@ -57,7 +57,7 @@ return [
     'breadcrumbs_option_note' => 'Kırıntıları buradan Etkinleştir / Devre Dışı Bırak',
     'breadcrumbs_option' => 'Galeta unu',
     'proposal_already_submitted' => 'Teklif zaten gönderildi, bu işe teklif gönderemezsiniz',
-    'read_more' => 'Daha fazla oku',
+    'read_more' => 'Read More',
     'less' => 'Az',
     'cancelled' => 'İptal edildi',
     'pending' => 'kadar',
@@ -1214,4 +1214,5 @@ return [
     'edit' => 'Edit',
     'show' => 'Show',
     'data-updated' => 'Data Updated',
+    'results' => 'Results',
 ];

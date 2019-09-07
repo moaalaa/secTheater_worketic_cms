@@ -57,7 +57,7 @@ return [
     'breadcrumbs_option_note' => 'Ви можете ввімкнути / вимкнути сухарі звідси',
     'breadcrumbs_option' => 'Панірувальні сухарі',
     'proposal_already_submitted' => 'Пропозиція вже надіслана, ви не можете надіслати пропозицію до цього завдання',
-    'read_more' => 'Детальніше',
+    'read_more' => 'Read More',
     'less' => 'Менше',
     'cancelled' => 'Скасовано',
     'pending' => 'Очікує на розгляд',
@@ -1214,4 +1214,5 @@ return [
     'edit' => 'Edit',
     'show' => 'Show',
     'data-updated' => 'Data Updated',
+    'results' => 'Results',
 ];

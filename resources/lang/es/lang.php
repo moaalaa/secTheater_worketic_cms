@@ -57,7 +57,7 @@ return [
     'breadcrumbs_option_note' => 'Puede habilitar / deshabilitar las migas de pan desde aquí',
     'breadcrumbs_option' => 'Migas de pan',
     'proposal_already_submitted' => 'Propuesta ya enviada, no puede enviar una propuesta para este trabajo',
-    'read_more' => 'Lee mas',
+    'read_more' => 'Read More',
     'less' => 'Menos',
     'cancelled' => 'Cancelada',
     'pending' => 'Pendiente',
@@ -1214,4 +1214,5 @@ return [
     'edit' => 'Edit',
     'show' => 'Show',
     'data-updated' => 'Data Updated',
+    'results' => 'Results',
 ];

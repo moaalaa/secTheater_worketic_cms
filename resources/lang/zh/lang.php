@@ -57,7 +57,7 @@ return [
     'breadcrumbs_option_note' => '您可以从此处启用/禁用面包屑',
     'breadcrumbs_option' => '面包屑',
     'proposal_already_submitted' => '提案已提交，您无法提交此职位的提案',
-    'read_more' => '阅读更多',
+    'read_more' => 'Read More',
     'less' => '减',
     'cancelled' => '取消',
     'pending' => '有待',
@@ -1214,4 +1214,5 @@ return [
     'edit' => 'Edit',
     'show' => 'Show',
     'data-updated' => 'Data Updated',
+    'results' => 'Results',
 ];

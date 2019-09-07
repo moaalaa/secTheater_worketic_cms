@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Post;
+use App\SiteManagement;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -35,9 +36,17 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('front-end.posts.index');
+        $categories         = Category::all();
+        $posts              = Post::query();
+        $allPostsCount      = $posts->count();
+        $posts              = $posts->filter($request)->get();
+        $keyword            = $request->has('keyword') ? $request->keyword : null;
+        $categoriesFilter   = $request->has('categoriesFilter') ? $request->categoriesFilter : [];
+        
+        
+        return view('front-end.posts.index', compact('posts', 'allPostsCount', 'categories', 'keyword', 'categoriesFilter'));
     }
 
     /**

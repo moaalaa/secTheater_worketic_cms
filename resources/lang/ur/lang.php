@@ -57,7 +57,7 @@ return [
     'breadcrumbs_option_note' => 'آپ یہاں سے بریڈکرمز کو فعال / غیر فعال کرسکتے ہیں۔',
     'breadcrumbs_option' => 'بریڈ کرمبس۔',
     'proposal_already_submitted' => 'تجویز پہلے ہی پیش کی گئی ہے ، آپ اس کام پر تجویز پیش نہیں کرسکتے ہیں۔',
-    'read_more' => 'مزید پڑھ',
+    'read_more' => 'Read More',
     'less' => 'کم',
     'cancelled' => 'منسوخ',
     'pending' => 'زیر التواء',
@@ -1211,4 +1211,5 @@ return [
     'edit' => 'Edit',
     'show' => 'Show',
     'data-updated' => 'Data Updated',
+    'results' => 'Results',
 ];

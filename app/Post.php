@@ -3,7 +3,9 @@
 namespace App;
 
 use App\Utils\ImagePathHelpers;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class Post extends Model
 {
@@ -47,6 +49,19 @@ class Post extends Model
         }
 
        return $image->store(static::IMAGE_DIRECTORY_NAME);
+    }
+
+    public function scopeFilter(Builder $builder, Request $request)
+    {
+        if ($request->has('keyword') && $request->filled('keyword')) {
+            $builder->where('title', 'like', "%{$request->keyword}%");
+        }
+
+        if ($request->has('categoriesFilter') && is_array($request->categoriesFilter) && count($request->categoriesFilter) > 0) {
+            $builder->orWhereIn('category_id', $request->categoriesFilter);
+        }
+
+        return $builder;
     }
 
     public function setSlugAttribute($value)

@@ -57,7 +57,7 @@ return [
     'breadcrumbs_option_note' => 'আপনি এখান থেকে অক্ষম/রুটিচক্রগুলি সক্ষম করতে পারেন',
     'breadcrumbs_option' => 'ব্রেডক্রাম্ব',
     'proposal_already_submitted' => 'প্রস্তাব ইতিমধ্যে জমা দেওয়া হয়েছে, আপনি এই কাজের প্রস্তাব জমা দিতে পারবেন না',
-    'read_more' => 'আরও পড়ুন',
+    'read_more' => 'Read More',
     'less' => 'কম',
     'cancelled' => 'বাতিল করা হয়েছে',
     'pending' => 'মুলতুবী',
@@ -1212,4 +1212,5 @@ return [
     'edit' => 'Edit',
     'show' => 'Show',
     'data-updated' => 'Data Updated',
+    'results' => 'Results',
 ];

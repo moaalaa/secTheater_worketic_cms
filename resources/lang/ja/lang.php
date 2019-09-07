@@ -57,7 +57,7 @@ return [
     'breadcrumbs_option_note' => 'ここからパンくずリストを有効/無効にすることができます。',
     'breadcrumbs_option' => 'パン粉',
     'proposal_already_submitted' => '提案はすでに送信されています。このジョブに提案を送信することはできません',
-    'read_more' => '続きを読む',
+    'read_more' => 'Read More',
     'less' => 'もっと少なく',
     'cancelled' => 'キャンセル',
     'pending' => '保留中',
@@ -1214,4 +1214,5 @@ return [
     'edit' => 'Edit',
     'show' => 'Show',
     'data-updated' => 'Data Updated',
+    'results' => 'Results',
 ];

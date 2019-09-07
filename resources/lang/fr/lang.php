@@ -57,7 +57,7 @@ return [
     'breadcrumbs_option_note' => 'Vous pouvez activer / désactiver la chapelure à partir d\'ici',
     'breadcrumbs_option' => 'Chapelure',
     'proposal_already_submitted' => 'Proposition déjà soumise, vous ne pouvez pas soumettre de proposition pour ce travail',
-    'read_more' => 'Lire la suite',
+    'read_more' => 'Read More',
     'less' => 'Moins',
     'cancelled' => 'Annulé',
     'pending' => 'en attendant',
@@ -1214,4 +1214,5 @@ return [
     'edit' => 'Edit',
     'show' => 'Show',
     'data-updated' => 'Data Updated',
+    'results' => 'Results',
 ];

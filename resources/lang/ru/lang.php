@@ -57,7 +57,7 @@ return [
     'breadcrumbs_option_note' => 'Вы можете включить / отключить хлебные крошки здесь',
     'breadcrumbs_option' => 'Панировочные сухари',
     'proposal_already_submitted' => 'Предложение уже отправлено, вы не можете отправить предложение на эту работу',
-    'read_more' => 'Прочитайте больше',
+    'read_more' => 'Read More',
     'less' => 'Меньше',
     'cancelled' => 'отменен',
     'pending' => 'в ожидании',
@@ -1214,4 +1214,5 @@ return [
     'edit' => 'Edit',
     'show' => 'Show',
     'data-updated' => 'Data Updated',
+    'results' => 'Results',
 ];

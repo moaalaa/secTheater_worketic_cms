@@ -1,4 +1,4 @@
-@extends(file_exists(resource_path('views/extend/back-end/master.blade.php')) ? 'extend.back-end.master' : 'back-end.master')
+@extends('back-end.master')
 @section('content')
     <div class="posts-listing" id="post-list">
         @if (Session::has('message'))
@@ -120,11 +120,7 @@
                                 
                             </div>
                         @else
-                            @if (file_exists(resource_path('views/extend/errors/no-record.blade.php'))) 
-                                @include('extend.errors.no-record')
-                            @else 
-                                @include('errors.no-record')
-                            @endif
+                            @include('errors.no-record')
                         @endif
                     </div>
                 </div>

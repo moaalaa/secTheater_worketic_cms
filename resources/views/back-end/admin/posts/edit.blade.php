@@ -1,4 +1,4 @@
-@extends(file_exists(resource_path('views/extend/back-end/master.blade.php')) ? 'extend.back-end.master' : 'back-end.master')
+@extends('back-end.master')
 @section('content')
     <div class="cats-listing" id="cat-list">
         @if (Session::has('message'))

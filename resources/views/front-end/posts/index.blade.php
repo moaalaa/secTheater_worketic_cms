@@ -1,56 +1,81 @@
-@extends(file_exists(resource_path('views/extend/front-end/master.blade.php')) ? 
-'extend.front-end.master':
- 'front-end.master', ['body_class' => 'wt-innerbgcolor'] )
+@extends('front-end.master', ['body_class' => 'wt-innerbgcolor'])
+
+@section('title', 'Posts List')
+
+@section('description', 'Posts List Page')
+
 @section('content')
-    <div class="wt-haslayout wt-innerbannerholder">
+    
+    {{-- Banner --}}
+
+    <div class="wt-haslayout wt-innerbannerholder" style="background-image:url({{ asset('/images/bannerimg/img-02.jpg') }})">
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-xs-12 col-sm-12 col-md-8 push-md-2 col-lg-6 push-lg-3">
                     <div class="wt-innerbannercontent">
-                        <div class="wt-title"><h2>Categories Listing</h2></div>
-                        @if (!empty($show_breadcrumbs) && $show_breadcrumbs === 'true')
-                            <ol class="wt-breadcrumb">
-                                <li><a href="index.html">Home</a></li>
-                                <li class="wt-active">Categories</li>
-                            </ol>
-                        @endif
+                        <div class="wt-title">
+                            <h2>{{ trans('lang.posts') }}</h2>
+                        </div>
+
+                        <ol class="wt-breadcrumb">
+                            <li><a href="/">{{ trans('lang.home') }}</a></li>
+                            <li class="active">{{ trans('lang.posts') }}</li>
+                        </ol>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="wt-haslayout wt-main-section" id="jobs">
-        @if (Session::has('payment_message'))
-            @php $response = Session::get('payment_message') @endphp
-            <div class="flash_msg">
-                <flash_messages :message_class="'{{{$response['code']}}}'" :time ='5' :message="'{{{ $response['message'] }}}'" v-cloak></flash_messages>
-            </div>
-        @endif
+
+    <div class="wt-haslayout wt-main-section" id="user_profile">
         <div class="wt-haslayout">
             <div class="container">
                 <div class="row">
                     <div id="wt-twocolumns" class="wt-twocolumns wt-haslayout">
-                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-9 col-xl-9 float-left">
+                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-4 float-left">
+                            @include('front-end.posts.filters', ['categories' => $categories])
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8 float-left">
+                            <div class="wt-userlistingtitle">
+                                @if ($posts->isNotEmpty())
+                                    <span>
+                                        {{ $posts->count() }} of {{ $allPostsCount }} {{ trans('lang.results') }} 
+                                        
+                                        {{-- @if (!empty($keyword)) 
+                                            for <em>"{{$keyword}}"</em> 
+                                        @endif --}}
+                                    </span>
+                                @endif
+                            </div>
                             <div class="wt-companysinfoholder">
                                 <div class="row">
-                                    @foreach($categories as $category)
-                                        <div class="col-12 col-sm-12 col-md-12 col-lg-4">
-                                            <div class="wt-companysdetails">
-                                                <figure class="wt-companysimg">
-                                                    <img src="{{{ asset('/images/banner.jpg') }}}" alt="{{ trans('lang.img') }}">
-                                                </figure>
-                                                <div class="wt-companysinfo">
-                                                    <figure><img src="{{{ asset(\App\Helper::getCategoryImage($category->image)) }}}" alt="{{{ $category->title }}}"></figure>
-                                                    <div class="wt-title">
-                                                        <h2>{{{ $category->title }}}</h2>
-                                                    </div>
-                                                    <div class="wt-description">
-                                                        <p>{{{ $category->abstract }}}</p>
+                                    @if ($posts->isNotEmpty())
+                                        @foreach ($posts as $post)
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+
+
+                                                <div class="card mb-3">
+                                                    <img src="{{ $post->imagePath }}" class="card-img-top" alt="{{ $post->title }}" style="height: 15rem !important;">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">{{ $post->title }}</h5>
+                                                        <p class="card-text">
+                                                            {{ str_limit($post->body, 100, '...') }}
+                                                        </p>
+                                                        <a href="{{ route('posts.show', $post) }}" class="btn btn-link">{{ trans('lang.read_more') }}</a>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    @endforeach
+
+                                        @endforeach
+                                        @if ( method_exists($posts,'links') )
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 la-postpagintaion">
+                                                {{ $posts->links('pagination.custom') }}
+                                            </div>
+                                        @endif
+                                    @else
+                                        @include('errors.no-record')
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -59,4 +84,4 @@
             </div>
         </div>
     </div>
-@endsection
+    @endsection

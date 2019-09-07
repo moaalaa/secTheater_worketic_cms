@@ -57,7 +57,7 @@ return [
     'breadcrumbs_option_note' => 'Você pode habilitar / desabilitar breadcrumbs daqui',
     'breadcrumbs_option' => 'Pão ralado',
     'proposal_already_submitted' => 'Proposta já enviada, você não pode enviar proposta para este trabalho',
-    'read_more' => 'consulte Mais informação',
+    'read_more' => 'Read More',
     'less' => 'Menos',
     'cancelled' => 'Cancelar',
     'pending' => 'Pendente',
@@ -1214,4 +1214,5 @@ return [
     'edit' => 'Edit',
     'show' => 'Show',
     'data-updated' => 'Data Updated',
+    'results' => 'Results',
 ];

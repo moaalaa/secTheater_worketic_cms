@@ -57,7 +57,7 @@ return [
     'breadcrumbs_option_note' => 'Hier können Sie Paniermehl aktivieren / deaktivieren',
     'breadcrumbs_option' => 'Semmelbrösel',
     'proposal_already_submitted' => 'Angebot bereits eingereicht, Sie können kein Angebot für diesen Job einreichen',
-    'read_more' => 'Weiterlesen',
+    'read_more' => 'Read More',
     'less' => 'Weniger',
     'cancelled' => 'Abgebrochen',
     'pending' => 'steht aus',
@@ -1214,4 +1214,5 @@ return [
     'edit' => 'Edit',
     'show' => 'Show',
     'data-updated' => 'Data Updated',
+    'results' => 'Results',
 ];
