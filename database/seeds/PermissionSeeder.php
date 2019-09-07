@@ -31,19 +31,37 @@ class PermissionSeeder extends Seeder
         DB::table('permissions')->insert(
             [
                 [
-                    'name' => 'create_posts',
+                    'name' => 'create_skills',
                     'guard_name' => 'admin',
                     'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                     'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 ],
                 [
-                    'name' => 'update_posts',
+                    'name' => 'update_skills',
                     'guard_name' => 'admin',
                     'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                     'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 ],
                 [
-                    'name' => 'delete_posts',
+                    'name' => 'delete_skills',
+                    'guard_name' => 'admin',
+                    'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                    'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'create_departments',
+                    'guard_name' => 'admin',
+                    'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                    'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'update_departments',
+                    'guard_name' => 'admin',
+                    'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                    'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'delete_departments',
                     'guard_name' => 'admin',
                     'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                     'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -93,6 +111,45 @@ class PermissionSeeder extends Seeder
                     'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                     'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 ],
+                [
+                    'name' => 'update_location',
+                    'guard_name' => 'admin',
+                    'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                    'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'delete_location',
+                    'guard_name' => 'admin',
+                    'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                    'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                ],
+                //================================= Employer
+                [
+                    'name' => 'settings',
+                    'guard_name' => 'admin',
+                    'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                    'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'post_job',
+                    'guard_name' => 'employer',
+                    'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                    'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'hire_freelancer',
+                    'guard_name' => 'employer',
+                    'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                    'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'manage_jobs',
+                    'guard_name' => 'employer',
+                    'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                    'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                ],
+                //================================= Freelancer
+
             ]
         );
     }

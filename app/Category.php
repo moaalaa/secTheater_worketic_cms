@@ -56,6 +56,16 @@ class Category extends Model
         return $this->morphedByMany('App\User', 'catable');
     }
 
+    /**
+     * Get all of the posts that are assigned this category.
+     *
+     * @return relation
+     */
+    public function posts()
+    {
+        return $this->hasMany('App\Post', 'category_id');
+    }
+
 
     /**
      * Get all of the jobs that are assigned this category.

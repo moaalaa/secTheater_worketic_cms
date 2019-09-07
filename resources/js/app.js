@@ -978,10 +978,6 @@ if (document.getElementById("cat-list")) {
                 jQuery("#wt-cats").change(function () {
                     jQuery("input:checkbox").prop('checked', jQuery(this).prop("checked"));
                 });
-                
-                jQuery("#wt-posts").change(function () {
-                    jQuery("input:checkbox").prop('checked', jQuery(this).prop("checked"));
-                });
             },
             selectRecord: function () {
                 if (document.querySelectorAll('input[type="checkbox"]:checked').length > 0) {
@@ -990,22 +986,11 @@ if (document.getElementById("cat-list")) {
                     this.is_show = false;
                 }
             },
-            deleteChecked: function (msg, text, url = '/admin/delete-checked-cats', redirectUrl = '/admin/categories', useAppPath = true) {
+            deleteChecked: function (msg, text) {
                 var deleteIDs = jQuery("#checked-val input:checkbox:checked").map(function () {
                     return jQuery(this).val();
                 }).get();
-
-                var fullUrl = '';
-                var fullRedirectUrl = '';
-
-                if (useAppPath) {
-                    fullUrl = APP_URL + url;
-                    fullRedirectUrl = APP_URL + redirectUrl;
-                } else {
-                    fullUrl = url;
-                    fullRedirectUrl = redirectUrl;
-                }
-
+                console.log(deleteIDs);
                 var self = this;
                 this.$swal({
                     title: msg,
@@ -1021,7 +1006,7 @@ if (document.getElementById("cat-list")) {
                 }).then((result) => {
                     var self = this;
                     if (result.value) {
-                        axios.post(fullUrl, {
+                        axios.post(APP_URL + '/admin/delete-checked-cats', {
                             ids: deleteIDs
                         })
                             .then(function (response) {
@@ -1033,7 +1018,87 @@ if (document.getElementById("cat-list")) {
                                             type: "success"
                                         })
                                     }, 500);
-                                    window.location.replace(fullRedirectUrl);
+                                    window.location.replace(APP_URL + '/admin/categories');
+                                } else {
+                                    self.showError(response.data.message);
+                                }
+                            })
+                    } else {
+                        this.$swal.close()
+                    }
+                })
+            }
+        }
+    });
+}
+
+if (document.getElementById("post-list")) {
+    const vmpostList = new Vue({
+        el: '#post-list',
+        mounted: function () {
+            if (document.getElementsByClassName("flash_msg") != null) {
+                flashVue.$emit('showFlashMessage');
+            }
+        },
+        data: {
+            uploaded_image: false,
+            color: '',
+            rgb: '',
+            wheel: '',
+            is_show: false
+        },
+        components: { Verte },
+        methods: {
+            removeImage: function (id) {
+                this.uploaded_image = true;
+                document.getElementById(id).value = '';
+            },
+            selectAll: function () {
+                this.is_show = !this.is_show;
+                jQuery("#wt-posts").change(function () {
+                    jQuery("input:checkbox").prop('checked', jQuery(this).prop("checked"));
+                });
+            },
+            selectRecord: function () {
+                if (document.querySelectorAll('input[type="checkbox"]:checked').length > 0) {
+                    this.is_show = true;
+                } else {
+                    this.is_show = false;
+                }
+            },
+            deleteChecked: function (msg, text, url, redirectUrl) {
+                var deleteIDs = jQuery("#checked-val input:checkbox:checked").map(function () {
+                    return jQuery(this).val();
+                }).get();
+                
+                var self = this;
+                this.$swal({
+                    title: msg,
+                    type: "warning",
+                    customContainerClass: 'hire_popup',
+                    showCancelButton: true,
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "Yes",
+                    cancelButtonText: "No",
+                    closeOnConfirm: true,
+                    closeOnCancel: true,
+                    showLoaderOnConfirm: true
+                }).then((result) => {
+                    var self = this;
+                    if (result.value) {
+                        axios.post(url, {
+                            ids: deleteIDs
+                        })
+                            .then(function (response) {
+                                if (response.data.type == "success") {
+                                    setTimeout(function () {
+                                        self.$swal({
+                                            title: this.title,
+                                            text: text,
+                                            type: "success"
+                                        })
+                                    }, 500);
+                                    window.location.replace(redirectUrl);
                                 } else {
                                     self.showError(response.data.message);
                                 }

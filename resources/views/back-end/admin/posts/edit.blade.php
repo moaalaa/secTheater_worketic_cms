@@ -12,74 +12,55 @@
         @endif
         <section class="wt-haslayout wt-dbsectionspace la-editcategory">
             <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 float-left">
-                    <div class="wt-dashboardbox">
-                        <div class="wt-dashboardboxtitle">
-                            <h2>{{{ trans('lang.edit_cat') }}}</h2>
-                        </div>
-                        <div class="wt-dashboardboxcontent">
-                            {!! Form::open(['url' => url('admin/categories/update-cats/'.$cats->id.''),
-                                'class' =>'wt-formtheme wt-formprojectinfo wt-formcategory', 'id' => 'categories'] )
-                            !!}
-                                <fieldset>
-                                    <div class="form-group">
-                                        {!! Form::text( 'category_title', e($cats['title']), ['class' =>'form-control'] ) !!}
-                                        <span class="form-group-description">{{{ trans('lang.desc') }}}</span>
-                                    </div>
-                                    <div class="form-group">
-                                        {!! Form::textarea( 'category_abstract', e($cats['abstract']), ['class' =>'form-control',
-                                        'placeholder' => trans('lang.ph_desc')] )
-                                        !!}
-                                        <span class="form-group-description">{{{ trans('lang.cat_desc') }}}</span>
-                                    </div>
-                                    <div class="wt-settingscontent">
-                                        @if (!empty($cats['image']))
-                                            <div class="wt-formtheme wt-userform">
-                                                <div v-if="this.uploaded_image">
-                                                    <upload-image
-                                                        :id="'cat_image'"
-                                                        :img_ref="'cat_img'"
-                                                        :url="'{{url('admin/categories/upload-temp-image')}}'"
-                                                        :name="'uploaded_image'"
-                                                        >
-                                                    </upload-image>
-                                                    {!! Form::hidden( 'uploaded_image', '', ['id'=>'hidden_img'] ) !!}
+                <div class="col-xl-2"></div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 col-xl-8 float-left">
+                        <div class="wt-dashboardbox la-post-box">
+                            <div class="wt-dashboardboxtitle">
+                                <h2>{{{ trans('lang.edit_post') }}}</h2>
+                            </div>
+                            <div class="wt-dashboardboxcontent">
+                                {!! Form::open([ 'url' => route('admin.posts.update', $post), 'method' => 'PATCH', 'class' =>'wt-formtheme wt-formprojectinfo wt-formpost', 'id'=> 'posts', 'files' => true ]) !!}
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="form-group-label">{{ trans('lang.title') }}</label>
+                                            {!! Form::text( 'title', $post->title, ['class' =>'form-control'.($errors->has('title') ? ' is-invalid' : ''), 'placeholder' => trans('lang.title')] ) !!}
+                                            @if ($errors->has('title'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('title') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-group-label">{{{ trans('lang.body') }}}</label>
+                                            {!! Form::textarea( 'body', $post->body, ['class' =>'form-control', 'placeholder' => trans('lang.body')] ) !!}
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-group-label">{{{ trans('lang.categories') }}}</label>
+                                            <select name="category_id" class="form-control" id="category_id" required>
+                                                <option selected disabled> {{ trans('lang.categories') }} </option>
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category->id }}" {{ $post->category_id == $category->id ? 'selected' : '' }}>{{ $category->title }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="wt-settingscontent">
+                                                <div class = "wt-formtheme wt-userform">
+                                                    <input type="file" name="image" id="image">
                                                 </div>
-                                                <div class="form-group" v-else>
-                                                    <ul class="wt-attachfile">
-                                                        <li>
-                                                            <span>{{{ $cats['image'] }}}</span>
-                                                            <em>{{{trans('lang.file_size')}}} <span data-dz-size></span>
-                                                                <a class="dz-remove" href="javascript:void();" v-on:click.prevent="removeImage('hidden_img')" >
-                                                                    <span class="lnr lnr-cross"></span>
-                                                                </a>
-                                                            </em>
-                                                        </li>
-                                                    </ul>
-                                                    <input type="hidden" name="uploaded_image" id="hidden_img" value="{{{$cats['image']}}}">
-                                                </div>
-                                            </div>
-                                        @else
-                                            <div class = "wt-formtheme wt-userform">
-                                                <upload-image
-                                                    :id="'cat_image'"
-                                                    :img_ref="'cat_ref'"
-                                                    :url="'{{url('admin/categories/upload-temp-image')}}'"
-                                                    :name="'uploaded_image'"
-                                                    >
-                                                </upload-image>
-                                                {!! Form::hidden( 'uploaded_image', '', ['id'=>'hidden_img'] ) !!}
-                                            </div>
-                                        @endif
-                                    </div>
-                                    <div class="form-group wt-btnarea">
-                                        {!! Form::submit(trans('lang.update_cat'), ['class' => 'wt-btn']) !!}
-                                    </div>
-                                </fieldset>
-                            {!! Form::close(); !!}
+                                            </div>    
+                                        </div>
+                                        <div class="form-group">
+                                            <img src="{{ $post->imagePath }}" alt="{{ $post->title }}" width="200" >
+                                        </div>
+                                        <div class="form-group wt-btnarea">
+                                            {!! Form::submit(trans('lang.edit'), ['class' => 'wt-btn']) !!}
+                                        </div>
+                                    </fieldset>
+                                {!! Form::close(); !!}
+                            </div>
                         </div>
                     </div>
-                </div>
             </div>
         </section>
     </div>

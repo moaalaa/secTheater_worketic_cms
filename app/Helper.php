@@ -2657,10 +2657,10 @@ class Helper extends Model
             if (!empty($access_type)) {
                 return $access_type;
             } else {
-                return 'posts';
+                return 'jobs';
             }
         } else {
-            return 'posts';
+            return 'jobs';
         }
     }
 

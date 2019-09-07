@@ -1,7 +1,7 @@
 <nav id="wt-profiledashboard" class="wt-usernav">
         <ul>
             @if ($role === 'admin')
-                {{-- @if (Helper::getAccessType() == 'both' || Helper::getAccessType() == 'jobs')
+                @if (Helper::getAccessType() == 'both' || Helper::getAccessType() == 'jobs')
                     <li>
                         <a href="{{{ route('allJobs') }}}">
                             <i class="ti-briefcase"></i>
@@ -28,7 +28,7 @@
                         <i class="ti-check-box"></i>
                         <span>{{ trans('lang.review_options') }}</span>
                     </a>
-                </li>--}}
+                </li>
                 <li>
                     <a href="{{{ route('userListing') }}}">
                         <i class="ti-user"></i>
@@ -52,20 +52,18 @@
                         <li><a href="{{{ route('createPage') }}}">{{ trans('lang.add_pages') }}</a></li>
                     </ul>
                 </li>
-               {{-- 
-                    <li>
-                        <a href="{{{ route('createPackage') }}}">
-                            <i class="ti-package"></i>
-                            <span>{{ trans('lang.packages') }}</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{{ route('adminPayouts') }}}">
-                            <i class="ti-money"></i>
-                            <span>{{ trans('lang.payouts') }}</span>
-                        </a>
-                    </li> 
-                --}}
+                <li>
+                    <a href="{{{ route('createPackage') }}}">
+                        <i class="ti-package"></i>
+                        <span>{{ trans('lang.packages') }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{{ route('adminPayouts') }}}">
+                        <i class="ti-money"></i>
+                        <span>{{ trans('lang.payouts') }}</span>
+                    </a>
+                </li>
                 <li>
                     <a href="{{{ route('homePageSettings') }}}">
                         <i class="ti-home"></i>
@@ -91,19 +89,19 @@
                         <span>{{ trans('lang.taxonomies') }}</span>
                     </a>
                     <ul class="sub-menu">
-                        {{-- <li><a href="{{{ route('skills') }}}">{{ trans('lang.skills') }}</a></li> --}}
-                        <li><a href="{{{ route('categories') }}}">{{ trans('lang.cate') }}</a></li>
+                        <li><a href="{{{ route('skills') }}}">{{ trans('lang.skills') }}</a></li>
+                        <li><a href="{{{ route('categories') }}}">{{ trans('lang.job_cats') }}</a></li>
                         <li><a href="{{{ route('admin.posts.adminIndex') }}}">{{ trans('lang.posts') }}</a></li>
-                        {{-- <li><a href="{{{ route('departments') }}}">{{ trans('lang.dpts') }}</a></li> --}}
+                        <li><a href="{{{ route('departments') }}}">{{ trans('lang.dpts') }}</a></li>
                         <li><a href="{{{ route('languages') }}}">{{ trans('lang.langs') }}</a></li>
                         <li><a href="{{{ route('locations') }}}">{{ trans('lang.locations') }}</a></li>
-                        {{-- <li><a href="{{{ route('badges') }}}">{{ trans('lang.badges') }}</a></li> --}}
-                        {{-- <li><a href="{{{ route('deliveryTime') }}}">{{ trans('lang.delivery_time') }}</a></li> --}}
-                        {{-- <li><a href="{{{ route('ResponseTime') }}}">{{ trans('lang.response_time') }}</a></li> --}}
+                        <li><a href="{{{ route('badges') }}}">{{ trans('lang.badges') }}</a></li>
+                        <li><a href="{{{ route('deliveryTime') }}}">{{ trans('lang.delivery_time') }}</a></li>
+                        <li><a href="{{{ route('ResponseTime') }}}">{{ trans('lang.response_time') }}</a></li>
                     </ul>
                 </li>
             @endif
-            {{-- @if ($role === 'employer' || $role === 'freelancer' )
+            @if ($role === 'employer' || $role === 'freelancer' )
                 <li>
                     <a href="{{{ url($role.'/dashboard') }}}">
                         <i class="ti-desktop"></i>
@@ -250,7 +248,7 @@
                         <span>{{ trans('lang.saved_items') }}</span>
                     </a>
                 </li>
-            @endif --}}
+            @endif
             <li>
                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('profile-logout-form').submit();">
                     <i class="lnr lnr-exit"></i>

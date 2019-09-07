@@ -140,6 +140,7 @@
                             <ul class="sub-menu">
                                 <li><hr><a href="<?php echo e(route('skills')); ?>"><?php echo e(trans('lang.skills')); ?></a></li>
                                 <li><hr><a href="<?php echo e(route('categories')); ?>"><?php echo e(trans('lang.job_cats')); ?></a></li>
+                                <li><hr><a href="<?php echo e(route('admin.posts.adminIndex')); ?>"><?php echo e(trans('lang.posts')); ?></a></li>
                                 <li><hr><a href="<?php echo e(route('departments')); ?>"><?php echo e(trans('lang.dpts')); ?></a></li>
                                 <li><hr><a href="<?php echo e(route('languages')); ?>"><?php echo e(trans('lang.langs')); ?></a></li>
                                 <li><hr><a href="<?php echo e(route('locations')); ?>"><?php echo e(trans('lang.locations')); ?></a></li>

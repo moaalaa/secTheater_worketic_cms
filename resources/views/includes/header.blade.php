@@ -63,35 +63,30 @@
                                             @endif
                                         @endforeach
                                     @endif
-                                    {{-- <li>
+                                    <li>
                                         <a href="{{url('search-results?type=freelancer')}}">
                                             {{{ trans('lang.view_freelancers') }}}
                                         </a>
-                                    </li> --}}
-                                    {{-- <li>
+                                    </li>
+                                    <li>
                                         <a href="{{url('search-results?type=employer')}}">
                                             {{{ trans('lang.view_employers') }}}
                                         </a>
-                                    </li> --}}
-                                {{-- @if ($type =='jobs' || $type == 'both')
+                                    </li>
+                                @if ($type =='jobs' || $type == 'both')
                                         <li>
                                             <a href="{{url('search-results?type=job')}}">
                                                 {{{ trans('lang.browse_jobs') }}}
                                             </a>
                                         </li>
-                                    @endif --}}
-                                {{-- @if ($type =='services' || $type == 'both')
+                                    @endif
+                                @if ($type =='services' || $type == 'both')
                                     <li>
                                         <a href="{{url('search-results?type=service')}}">
                                             {{{ trans('lang.browse_services') }}}
                                         </a>
                                     </li>
-                                @endif --}}
-                                    <li>
-                                        <a href="{{ route('posts.index') }}">
-                                            {{{ trans('lang.posts') }}}
-                                        </a>
-                                    </li>
+                                @endif
                                 </ul>
                             </div>
                         </nav>

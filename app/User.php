@@ -41,9 +41,6 @@ class User extends Authenticatable
 {
     use Notifiable;
     use HasRoles;
-
-    const ADMIN_ROLE_NAME = 'admin';
-    const USER_ROLE_NAME = 'user';
     protected $guard_name = 'web';
 
     /**
@@ -298,12 +295,8 @@ class User extends Authenticatable
             $this->email = filter_var($request['email'], FILTER_VALIDATE_EMAIL);
             $this->password = Hash::make($request['password']);
             $this->verification_code = $verification_code;
-            $this->user_verified = 1;
-            if (isset($request['role'])) {
-                $this->assignRole($request['role']);
-            } else {
-                $this->assignRole(static::USER_ROLE_NAME);
-            }
+            $this->user_verified = 0;
+            $this->assignRole($request['role']);
             if (!empty($request['locations'])) {
                 $location = Location::find($request['locations']);
                 $this->location()->associate($location);
@@ -322,18 +315,18 @@ class User extends Authenticatable
                 $profile->department()->associate($department);
             }
             $profile->save();
-            // $role_id = Helper::getRoleByUserID($user_id);
-            // $package = Package::select('id', 'title', 'cost')->where('role_id', $role_id)->where('trial', 1)->get()->first();
-            // $trial_invoice = Invoice::select('id')->where('type', 'trial')->get()->first();
-            // if (!empty($package) && !empty($trial_invoice)) {
-            //     DB::table('items')->insert(
-            //         [
-            //             'invoice_id' => $trial_invoice->id, 'product_id' => $package->id, 'subscriber' => $user_id,
-            //             'item_name' => $package->title, 'item_price' => $package->cost, 'item_qty' => 1,
-            //             "created_at" => \Carbon\Carbon::now(), 'updated_at' => \Carbon\Carbon::now()
-            //         ]
-            //     );
-            // }
+            $role_id = Helper::getRoleByUserID($user_id);
+            $package = Package::select('id', 'title', 'cost')->where('role_id', $role_id)->where('trial', 1)->get()->first();
+            $trial_invoice = Invoice::select('id')->where('type', 'trial')->get()->first();
+            if (!empty($package) && !empty($trial_invoice)) {
+                DB::table('items')->insert(
+                    [
+                        'invoice_id' => $trial_invoice->id, 'product_id' => $package->id, 'subscriber' => $user_id,
+                        'item_name' => $package->title, 'item_price' => $package->cost, 'item_qty' => 1,
+                        "created_at" => \Carbon\Carbon::now(), 'updated_at' => \Carbon\Carbon::now()
+                    ]
+                );
+            }
             return $user_id;
         }
     }

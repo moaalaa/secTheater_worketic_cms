@@ -107,11 +107,9 @@
                     this.selected_type = this.freelancer_placeholder;
                 } else if(type == 'employer') {
                     this.selected_type = this.employer_placeholder;
-                } 
-                // else if(type == 'job') {
-                //     this.selected_type = this.job_placeholder;
-                // } 
-                else if(type == 'service') {
+                } else if(type == 'job') {
+                    this.selected_type = this.job_placeholder;
+                } else if(type == 'service') {
                     this.selected_type = this.service_placeholder;
                 }
             },
@@ -130,22 +128,20 @@
             getSearchableData: function(type, newQuery){
                 this.displayFiltersName(type);
                 let self = this;
-                // axios.post(APP_URL + '/search/get-searchable-data',{
-                //     type:type
-                // })
-                // .then(function (response) {
-                //     if (type == 'freelancer') {
-                //         self.searchable_data = response.data.searchables;
-                //     } else if (type == 'employer') {
-                //         self.searchable_data = response.data.searchables;
-                //     } 
-                //     // else if (type == 'job') {
-                //     //     self.searchable_data = response.data.searchables;
-                //     // } 
-                //     else if (type == 'service') {
-                //         self.searchable_data = response.data.searchables;
-                //     }
-                // });
+                axios.post(APP_URL + '/search/get-searchable-data',{
+                    type:type
+                })
+                .then(function (response) {
+                    if (type == 'freelancer') {
+                        self.searchable_data = response.data.searchables;
+                    } else if (type == 'employer') {
+                        self.searchable_data = response.data.searchables;
+                    } else if (type == 'job') {
+                        self.searchable_data = response.data.searchables;
+                    } else if (type == 'service') {
+                        self.searchable_data = response.data.searchables;
+                    }
+                });
             },
             emptyField:function(types){
                 this.$refs.searchfield.inputValue = '';
@@ -174,11 +170,9 @@
                         type = 'freelancer';
                     } else if(type == 'Employers') {
                         type = 'employer';
-                    } 
-                    // else if(type == 'Jobs') {
-                    //     type = 'job';
-                    // } 
-                    else if(type == 'Services') {
+                    } else if(type == 'Jobs') {
+                        type = 'job';
+                    } else if(type == 'Services') {
                         type = 'service';
                     }
                     jQuery('.search-field').parents('.form-group').find('span.no-record-span').css("display", "none");
@@ -211,21 +205,18 @@
                             type = 'freelancer';
                     }   else if(type == 'Employers') {
                             type = 'employer';
-                    }   
-                    // else if(type == 'Jobs') {
-                    //         type = 'job';
-                    // } 
-                    else if(type == 'Services') {
+                    }   else if(type == 'Jobs') {
+                            type = 'job';
+                    } else if(type == 'Services') {
                             type = 'service';
                     }
                 }
                 if (this.$refs.searchfield.inputValue != '') {
                     let slug = document.getElementById('hidden_field').value;
                     let keyword = this.query;
-                    // if (type == 'job') {
-                    //     window.location.replace(APP_URL+'/job/'+slug);
-                    // } else 
-                    if (type == 'service'){
+                    if (type == 'job') {
+                        window.location.replace(APP_URL+'/job/'+slug);
+                    } else if (type == 'service'){
                         window.location.replace(APP_URL+'/service/'+slug);
                     } 
                     else {

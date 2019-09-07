@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class PostsController extends Controller
 {
@@ -17,11 +18,12 @@ class PostsController extends Controller
     {
         if ($request->has('keyword')) {
 
-            $posts = Post::where('title', 'like', '%' . $request->keyword . '%')->paginate(10);
+            $posts = Post::where('title', 'like', '%' . $request->keyword . '%')->with('category')->paginate(10);
 
         } else {
-            $posts = Post::paginate(10);
+            $posts = Post::with('category')->paginate(10);
         }
+        
 
         $categories = Category::all();
 
@@ -57,11 +59,12 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title' => 'required',
-            'body'  => 'required',
+            'title'         => 'required',
+            'body'          => 'required',
+            'category_id'   => ['required', Rule::exists('categories', 'id')]
         ]);
 
-        $validated['image'] = $request->hasFile('image') ? $request->file('image')->store('/posts/') : null;
+        $validated['image'] = $request->hasFile('image') ? $request->file('image')->store(Post::IMAGE_DIRECTORY_NAME) : null;
 
         Post::create($validated);
         
@@ -88,7 +91,9 @@ class PostsController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $categories = Category::all();
+
+        return view('back-end.admin.posts.edit', compact('post', 'categories'));
     }
 
     /**
@@ -100,7 +105,16 @@ class PostsController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $request->validate([
+            'title'         => 'required',
+            'body'          => 'required',
+            'category_id'   => ['required', Rule::exists('categories', 'id')]
+        ]);
+
+        $post->updateWithImage($request);
+
+        session()->flash('message', trans('lang.data-updated'));
+        return redirect()->route('admin.posts.adminIndex');
     }
 
     /**

@@ -132,6 +132,8 @@ return [
         ],
         'success' => 'あなたの.envファイル設定は保存されました。',
         'errors' => '.envファイルを保存できません。手動で作成してください。',
+        'title' => '',
+        'save' => '',
     ],
     'install' => 'インストール',
     'installed' => [

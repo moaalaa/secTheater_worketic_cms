@@ -30,11 +30,11 @@ class AdminSeeder extends Seeder
             [
                 //Admin
                 [
-                    'first_name' => 'admin',
-                    'last_name' => 'admin',
-                    'slug' => 'admin-admin',
-                    'email' => 'admin@example.com',
-                    'password' => bcrypt('123123'),
+                    'first_name' => 'chris',
+                    'last_name' => 'evans',
+                    'slug' => 'chris-evans',
+                    'email' => 'admin@amentotech.com',
+                    'password' => bcrypt('google'),
                     'location_id' => 1,
                     'user_verified' => 1,
                     'badge_id' => null,

@@ -123,7 +123,6 @@ class RegisterController extends Controller
      */
     protected function create($request)
     {
-        
         $json = array();
         $user = new User();
         $random_number = Helper::generateRandomCode(4);
@@ -132,12 +131,10 @@ class RegisterController extends Controller
         session()->put(['user_id' => $user_id]);
         session()->put(['email' => $request['email']]);
         session()->put(['password' => $request['password']]);
-        
         if (!empty(config('mail.username')) && !empty(config('mail.password'))) {
             $email_params = array();
             $template = DB::table('email_types')->select('id')
                 ->where('email_type', 'verification_code')->get()->first();
-        
             if (!empty($template->id)) {
                 $template_data = EmailTemplate::getEmailTemplateByID($template->id);
                 $email_params['verification_code'] = $user->verification_code;
@@ -159,7 +156,6 @@ class RegisterController extends Controller
             $json['email'] = 'not_configured';
             $json['url'] = url($user->getRoleNames()->first().'/dashboard');
         }
-
         $json['type'] = 'success';
         return $json;
     }

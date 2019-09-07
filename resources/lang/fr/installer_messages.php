@@ -132,6 +132,8 @@ return [
         ],
         'success' => 'Vos paramètres de fichier .env ont été enregistrés.',
         'errors' => 'Impossible de sauvegarder le fichier .env, veuillez le créer manuellement.',
+        'title' => '',
+        'save' => '',
     ],
     'install' => 'Installer',
     'final' => [

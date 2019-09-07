@@ -19,6 +19,12 @@ class CreatePostsTable extends Migration
             $table->text('body');
             $table->string('slug')->nullable();
             $table->string('image')->nullable();
+            $table->unsignedInteger('category_id')->nullable();
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('categories')
+                ->onDelete('set null');
+                
             $table->timestamps();
         });
     }

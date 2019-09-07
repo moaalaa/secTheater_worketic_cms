@@ -1,6 +1,6 @@
 @extends(file_exists(resource_path('views/extend/back-end/master.blade.php')) ? 'extend.back-end.master' : 'back-end.master')
 @section('content')
-    <div class="posts-listing" id="cat-list">
+    <div class="posts-listing" id="post-list">
         @if (Session::has('message'))
             <div class="flash_msg">
                 <flash_messages :message_class="'success'" :time ='5' :message="'{{{ Session::get('message') }}}'" v-cloak></flash_messages>
@@ -21,8 +21,8 @@
                             {!! Form::open([ 'url' => route('admin.posts.store'), 'class' =>'wt-formtheme wt-formprojectinfo wt-formpost', 'id'=> 'posts', 'files' => true ]) !!}
                                 <fieldset>
                                     <div class="form-group">
+                                        <label class="form-group-label">{{{ trans('lang.title') }}}</label>
                                         {!! Form::text( 'title', null, ['class' =>'form-control'.($errors->has('title') ? ' is-invalid' : ''), 'placeholder' => trans('lang.title')] ) !!}
-                                        <span class="form-group-description">{{{ trans('lang.desc') }}}</span>
                                         @if ($errors->has('title'))
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $errors->first('title') }}</strong>
@@ -30,8 +30,17 @@
                                         @endif
                                     </div>
                                     <div class="form-group">
+                                        <label class="form-group-label">{{{ trans('lang.body') }}}</label>
                                         {!! Form::textarea( 'body', null, ['class' =>'form-control', 'placeholder' => trans('lang.body')] ) !!}
-                                        <span class="form-group-description">{{{ trans('lang.body') }}}</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-group-label">{{{ trans('lang.categories') }}}</label>
+                                        <select name="category_id" class="form-control" id="category_id" required>
+                                            <option selected disabled> {{ trans('lang.categories') }} </option>
+                                            @foreach ($categories as $category)
+                                                <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <div class="wt-settingscontent">
@@ -77,6 +86,7 @@
                                                 </span>
                                             </th>
                                             <th>{{{ trans('lang.name') }}}</th>
+                                            <th>{{{ trans('lang.category') }}}</th>
                                             <th>{{{ trans('lang.action') }}}</th>
                                         </tr>
                                     </thead>
@@ -90,10 +100,11 @@
                                                         <label for="wt-check-{{{ $counter }}}"></label>
                                                     </span>
                                                 </td>
-                                                <td>{{{ $post->title }}}</td>
+                                                <td>{{ $post->title }}</td>
+                                                <td>{{ optional($post->category)->title }}</td>
                                                 <td>
                                                     <div class="wt-actionbtn">
-                                                        <a href="{{{ url('admin/posts/edit-posts') }}}/{{{ $post->id }}}" class="wt-addinfo wt-skillsaddinfo">
+                                                        <a href="{{ route('admin.posts.edit', $post) }}" class="wt-addinfo wt-skillsaddinfo">
                                                             <i class="lnr lnr-pencil"></i>
                                                         </a>
                                                         <delete :title="'{{trans("lang.ph_delete_confirm_title")}}'" :id="'{{ $post->id }}'" :message="'{{trans("lang.ph_post_delete_message")}}'" :url="'{{ route('admin.posts.destroy') }}'"></delete>

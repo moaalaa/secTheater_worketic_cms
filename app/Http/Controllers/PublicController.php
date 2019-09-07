@@ -147,7 +147,7 @@ class PublicController extends Controller
             $password = Session::get('password');
             $user = User::find($id);
             if (!empty($request['code'])) {
-                if ($request['code'] === $user->verification_code) {                    
+                if ($request['code'] === $user->verification_code) {
                     $user->user_verified = 1;
                     $user->verification_code = null;
                     $user->save();
@@ -161,6 +161,7 @@ class PublicController extends Controller
                     //         $email_params['name'] = Helper::getUserName($id);
                     //         $email_params['email'] = $email;
                     //         $email_params['password'] = $password;
+                            
                     //         Mail::to($email)
                     //             ->send(
                     //                 new GeneralEmailMailable(

@@ -24,45 +24,45 @@ class PrivateMessagesToSeeder extends Seeder
      */
     public function run()
     {
-        // DB::table('private_messages_to')->insert(
-        //     [
-        //         [
-        //             'private_message_id' => 1,
-        //             'recipent_id' => 21,
-        //             'message_read' => 0,
-        //             'read_date' => null,
-        //             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        //             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        DB::table('private_messages_to')->insert(
+            [
+                [
+                    'private_message_id' => 1,
+                    'recipent_id' => 21,
+                    'message_read' => 0,
+                    'read_date' => null,
+                    'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                    'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
 
-        //         ],
-        //         [
-        //             'private_message_id' => 2,
-        //             'recipent_id' => 4,
-        //             'message_read' => 0,
-        //             'read_date' => null,
-        //             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        //             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                ],
+                [
+                    'private_message_id' => 2,
+                    'recipent_id' => 4,
+                    'message_read' => 0,
+                    'read_date' => null,
+                    'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                    'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
 
-        //         ],
-        //         [
-        //             'private_message_id' => 3,
-        //             'recipent_id' => 21,
-        //             'message_read' => 0,
-        //             'read_date' => null,
-        //             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        //             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                ],
+                [
+                    'private_message_id' => 3,
+                    'recipent_id' => 21,
+                    'message_read' => 0,
+                    'read_date' => null,
+                    'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                    'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
 
-        //         ],
-        //         [
-        //             'private_message_id' => 4,
-        //             'recipent_id' => 4,
-        //             'message_read' => 0,
-        //             'read_date' => null,
-        //             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        //             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                ],
+                [
+                    'private_message_id' => 4,
+                    'recipent_id' => 4,
+                    'message_read' => 0,
+                    'read_date' => null,
+                    'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                    'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
 
-        //         ],
-        //     ]
-        // );
+                ],
+            ]
+        );
     }
 }

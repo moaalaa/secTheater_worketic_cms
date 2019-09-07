@@ -82,21 +82,23 @@ Route::post('user/add-wishlist', 'UserController@addWishlist');
 
 
 // ------------ Added By Mohamed Alaa El-Din --------------
-// User Routes
-Route::middleware('role:user')->group(function () {
-    Route::get('/user/dashboard', 'UsersController@index')->name('user.index');
-});
 
 // User Posts Routes
 Route::resource('/posts', 'PostsController')->only(['index', 'show']);
 
 // Admin Posts Routes
 Route::middleware('role:admin')->group(function () {
-    Route::get('/admin/posts/search', 'PostsController@adminIndex')->name('admin.posts.adminIndex');
-    Route::get('/admin/posts', 'PostsController@adminIndex')->name('admin.posts.adminIndex');
 
+    Route::get('/admin/posts/search', 'PostsController@adminIndex')->name('admin.posts.adminIndex');
+    
     Route::post('/admin/posts/delete', 'PostsController@destroy')->name('admin.posts.destroy');
     Route::post('/admin/posts/multi-delete', 'PostsController@deleteSelected')->name('admin.posts.multi-delete');
+    
+    Route::get('/admin/posts/edit', 'PostsController@edit')->name('admin.posts.edit');
+    Route::get('/admin/posts/{post}/edit', 'PostsController@edit')->name('admin.posts.edit');
+    Route::patch('/admin/posts/{post}/update', 'PostsController@update')->name('admin.posts.update');
+    
+    Route::get('/admin/posts', 'PostsController@adminIndex')->name('admin.posts.adminIndex');
     Route::post('/admin/posts', 'PostsController@store')->name('admin.posts.store');
 });
 
@@ -306,7 +308,6 @@ Route::group(
         Route::get('employer/payouts', 'EmployerController@getPayouts')->name('getEmployerPayouts');
     }
 );
-
 // Freelancer Routes
 Route::group(
     ['middleware' => ['role:freelancer']],

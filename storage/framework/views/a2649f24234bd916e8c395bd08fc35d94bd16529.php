@@ -65,16 +65,34 @@
                                             <?php endif; ?>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     <?php endif; ?>
-                                    
-                                    
-                                
-                                
                                     <li>
-                                        <a href="<?php echo e(route('posts.index')); ?>">
-                                            <?php echo e(trans('lang.posts')); ?>
+                                        <a href="<?php echo e(url('search-results?type=freelancer')); ?>">
+                                            <?php echo e(trans('lang.view_freelancers')); ?>
 
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="<?php echo e(url('search-results?type=employer')); ?>">
+                                            <?php echo e(trans('lang.view_employers')); ?>
+
+                                        </a>
+                                    </li>
+                                <?php if($type =='jobs' || $type == 'both'): ?>
+                                        <li>
+                                            <a href="<?php echo e(url('search-results?type=job')); ?>">
+                                                <?php echo e(trans('lang.browse_jobs')); ?>
+
+                                            </a>
+                                        </li>
+                                    <?php endif; ?>
+                                <?php if($type =='services' || $type == 'both'): ?>
+                                    <li>
+                                        <a href="<?php echo e(url('search-results?type=service')); ?>">
+                                            <?php echo e(trans('lang.browse_services')); ?>
+
+                                        </a>
+                                    </li>
+                                <?php endif; ?>
                                 </ul>
                             </div>
                         </nav>

@@ -1,5 +1,5 @@
 <?php $__env->startSection('content'); ?>
-    <div class="posts-listing" id="cat-list">
+    <div class="posts-listing" id="post-list">
         <?php if(Session::has('message')): ?>
             <div class="flash_msg">
                 <flash_messages :message_class="'success'" :time ='5' :message="'<?php echo e(Session::get('message')); ?>'" v-cloak></flash_messages>
@@ -21,9 +21,9 @@
 
                                 <fieldset>
                                     <div class="form-group">
+                                        <label class="form-group-label"><?php echo e(trans('lang.title')); ?></label>
                                         <?php echo Form::text( 'title', null, ['class' =>'form-control'.($errors->has('title') ? ' is-invalid' : ''), 'placeholder' => trans('lang.title')] ); ?>
 
-                                        <span class="form-group-description"><?php echo e(trans('lang.desc')); ?></span>
                                         <?php if($errors->has('title')): ?>
                                             <span class="invalid-feedback" role="alert">
                                                 <strong><?php echo e($errors->first('title')); ?></strong>
@@ -31,9 +31,18 @@
                                         <?php endif; ?>
                                     </div>
                                     <div class="form-group">
+                                        <label class="form-group-label"><?php echo e(trans('lang.body')); ?></label>
                                         <?php echo Form::textarea( 'body', null, ['class' =>'form-control', 'placeholder' => trans('lang.body')] ); ?>
 
-                                        <span class="form-group-description"><?php echo e(trans('lang.body')); ?></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-group-label"><?php echo e(trans('lang.categories')); ?></label>
+                                        <select name="category_id" class="form-control" id="category_id" required>
+                                            <option selected disabled> <?php echo e(trans('lang.categories')); ?> </option>
+                                            <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <option value="<?php echo e($category->id); ?>"><?php echo e($category->title); ?></option>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <div class="wt-settingscontent">
@@ -83,6 +92,7 @@
                                                 </span>
                                             </th>
                                             <th><?php echo e(trans('lang.name')); ?></th>
+                                            <th><?php echo e(trans('lang.category')); ?></th>
                                             <th><?php echo e(trans('lang.action')); ?></th>
                                         </tr>
                                     </thead>
@@ -97,9 +107,10 @@
                                                     </span>
                                                 </td>
                                                 <td><?php echo e($post->title); ?></td>
+                                                <td><?php echo e(optional($post->category)->title); ?></td>
                                                 <td>
                                                     <div class="wt-actionbtn">
-                                                        <a href="<?php echo e(url('admin/posts/edit-posts')); ?>/<?php echo e($post->id); ?>" class="wt-addinfo wt-skillsaddinfo">
+                                                        <a href="<?php echo e(route('admin.posts.edit', $post)); ?>" class="wt-addinfo wt-skillsaddinfo">
                                                             <i class="lnr lnr-pencil"></i>
                                                         </a>
                                                         <delete :title="'<?php echo e(trans("lang.ph_delete_confirm_title")); ?>'" :id="'<?php echo e($post->id); ?>'" :message="'<?php echo e(trans("lang.ph_post_delete_message")); ?>'" :url="'<?php echo e(route('admin.posts.destroy')); ?>'"></delete>
