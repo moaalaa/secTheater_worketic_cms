@@ -10,11 +10,6 @@ use Illuminate\Validation\Rule;
 
 class PostsController extends Controller
 {
-    /**
-     * Display a listing of the resource for admin.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function adminIndex(Request $request)
     {
         if ($request->has('keyword')) {
@@ -31,11 +26,6 @@ class PostsController extends Controller
         return view('back-end.admin.posts.index', compact('posts', 'categories'));
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         $categories         = Category::all();
@@ -49,22 +39,6 @@ class PostsController extends Controller
         return view('front-end.posts.index', compact('posts', 'allPostsCount', 'categories', 'keyword', 'categoriesFilter'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -81,23 +55,13 @@ class PostsController extends Controller
         return redirect()->route('admin.posts.adminIndex');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
     public function show(Post $post)
-    {
-        //
+    {        
+        $post->load('comments');
+        
+        return view('front-end.posts.show', compact('post'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Post $post)
     {
         $categories = Category::all();
@@ -105,13 +69,6 @@ class PostsController extends Controller
         return view('back-end.admin.posts.edit', compact('post', 'categories'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Post $post)
     {
         $request->validate([
@@ -126,12 +83,6 @@ class PostsController extends Controller
         return redirect()->route('admin.posts.adminIndex');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Request $request)
     {
         $json = [];
@@ -156,13 +107,6 @@ class PostsController extends Controller
         return $json;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param mixed $request request attributes
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function deleteSelected(Request $request)
     {
         $json = [];

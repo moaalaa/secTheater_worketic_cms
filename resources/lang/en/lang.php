@@ -1212,4 +1212,10 @@ return [
     'show' => 'Show',
     'data-updated' => 'Data Updated',
     'results' => 'Results',
+    'comments' => 'Comments',
+    'comment' => 'Comment',
+    'replies' => 'Replies',
+    'reply' => 'Reply',
+    'delete' => 'Delete',
+    'update' => 'Update',
 ];

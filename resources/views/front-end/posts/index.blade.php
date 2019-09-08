@@ -41,10 +41,6 @@
                                 @if ($posts->isNotEmpty())
                                     <span>
                                         {{ $posts->count() }} of {{ $allPostsCount }} {{ trans('lang.results') }} 
-                                        
-                                        {{-- @if (!empty($keyword)) 
-                                            for <em>"{{$keyword}}"</em> 
-                                        @endif --}}
                                     </span>
                                 @endif
                             </div>

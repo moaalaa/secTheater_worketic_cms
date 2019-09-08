@@ -29,6 +29,16 @@ class Post extends Model
         return $this->belongsTo('App\Category', 'category_id');
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'post_id');
+    }
+
+    public function comment($data)
+    {
+        return $this->comments()->create($data);
+    }
+
     public function updateWithImage($request) 
     {
         $data = $request->all();

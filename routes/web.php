@@ -81,10 +81,7 @@ Route::get('search-results', 'PublicController@getSearchResult')->name('searchRe
 Route::post('user/add-wishlist', 'UserController@addWishlist');
 
 
-// ------------ Added By Mohamed Alaa El-Din --------------
-
-// User Posts Routes
-Route::resource('/posts', 'PostsController')->only(['index', 'show']);
+// ------------ Posts --------------
 
 // Admin Posts Routes
 Route::middleware('role:admin')->group(function () {
@@ -102,7 +99,15 @@ Route::middleware('role:admin')->group(function () {
     Route::post('/admin/posts', 'PostsController@store')->name('admin.posts.store');
 });
 
-// ------------ Added By Mohamed Alaa El-Din --------------
+// User Posts Routes
+Route::resource('/posts', 'PostsController')->only(['index', 'show']);
+
+// Comments Routes
+Route::post('/posts/{post}/comment', 'CommentsController@comment')->name('comments.store');
+Route::patch('/posts/{post}/comments/{comment}', 'CommentsController@update')->name('comments.update');
+Route::delete('/posts/{post}/comments/{comment}', 'CommentsController@destroy')->name('comments.destroy');
+
+// ------------ Posts --------------
 
 
 

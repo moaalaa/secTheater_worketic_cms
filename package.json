@@ -29,6 +29,7 @@
         "express": "^4.16.4",
         "fs": "0.0.1-security",
         "lang.js": "^1.1.14",
+        "moment": "^2.24.0",
         "pc-bootstrap4-datetimepicker": "^4.17.50",
         "php-express": "0.0.3",
         "printd": "^1.3.0",

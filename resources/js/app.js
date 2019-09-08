@@ -49,9 +49,33 @@ window.Vue = require('vue');
 window.flashVue = new Vue();
 window.deleteVue = new Vue();
 window.flashMessageVue = new Vue();
+window.$Events = new Vue();
 
 Vue.use(datePicker);
 Vue.use(BootstrapVue);
+
+let authorizations = require('./authorization');
+
+Vue.prototype.$authorize = function (...params) {
+	if (!window.App.signedIn) return false;
+
+	if (typeof params[ 0 ] === 'string') {
+		return authorizations[ params[ 0 ] ](params[ 1 ])
+	}
+
+	return params[ 0 ](window.App.user);
+};
+
+Vue.prototype.$signedIn = window.App.signedIn;
+
+
+// ---------------------------  Posts -----------------------------
+
+Vue.component('comments-list', require('./components/Posts/CommentsListComponent.vue').default);
+Vue.component('comment-item', require('./components/Posts/CommentsItemComponent.vue').default);
+Vue.component('new-comment', require('./components/Posts/NewCommentComponent.vue').default);
+
+// --------------------------- End Posts --------------------------
 
 Vue.component('verte', Verte);
 Vue.component('upload-file', require('./components/UploadFileComponent.vue').default);
@@ -186,6 +210,18 @@ jQuery(document).ready(function () {
     });
 
 });
+
+
+// -------------------------------- Posts Vue ---------------------------------
+
+new Vue({
+    el: '#posts-app',
+    mounted: function () {
+        console.log('Mounted POsts App');
+    },
+});
+
+// -------------------------------- End Posts Vue ------------------------------
 
 if (document.getElementById("wt-header")) {
     const vmHeader = new Vue({

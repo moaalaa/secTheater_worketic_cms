@@ -60,6 +60,7 @@
 				]); ?>;
 		</script>
 	<?php endif; ?>
+
 	<script>
 		window.trans = <?php
 		$lang_files = File::files(resource_path() . '/lang/' . App::getLocale());
@@ -71,6 +72,14 @@
 		echo json_encode($trans);
 		?>;
 	</script>
+
+	<script>
+		window.App = <?php echo json_encode([
+			'user' => auth()->user(),
+			'signedIn' => auth()->check()
+		]); ?>;
+	</script>
+
 </head>
 
 <body class="wt-login <?php echo e(Helper::getBodyLangClass()); ?> <?php echo e(Helper::getTextDirection()); ?>">
