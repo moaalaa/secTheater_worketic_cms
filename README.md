@@ -68,3 +68,16 @@ php artisan migrate --seed
 ```bash
 php artisan serve
 ```
+
+### Login Credentials
+`Admin`
+- Email: admin@email.com
+- Password: google
+---
+`Employer`
+- Email: employer@email.com
+- Password: google
+---
+`Freelancer`
+- Email: freelancer@email.com
+- Password: google
