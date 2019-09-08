@@ -165,7 +165,7 @@
                                     @php echo htmlspecialchars_decode(stripslashes($profile->description)); @endphp
                                 </div>
                             </div>
-                            @if (!empty($jobs) && $jobs->count() > 0)
+                            {{-- @if (!empty($jobs) && $jobs->count() > 0)
                                 @foreach ($jobs as $job)
                                     @php
                                         $job = \App\Job::find($job->id);
@@ -234,7 +234,7 @@
                                 @else
                                     @include('errors.no-record')
                                 @endif
-                            @endif
+                            @endif --}}
                         </div>
                     </div>
                 </div>

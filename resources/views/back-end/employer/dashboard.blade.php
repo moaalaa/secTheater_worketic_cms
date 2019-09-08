@@ -5,7 +5,7 @@
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="wt-insightsitemholder">
                     <div class="row">
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4">
                             <div class="wt-insightsitem wt-dashboardbox {{$notify_class}}">
                                 <figure class="wt-userlistingimg">
                                     {{ Helper::getImages('uploads/settings/icon',$latest_new_message_icon, 'book') }}
@@ -18,8 +18,8 @@
                                 </div>
                             </div>
                         </div>
-                        @if ($access_type == 'jobs' || $access_type== 'both')
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                        {{-- @if ($access_type == 'jobs' || $access_type== 'both')
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                 <div class="wt-insightsitem wt-dashboardbox">
                                     <figure class="wt-userlistingimg">
                                         {{ Helper::getImages('uploads/settings/icon',$latest_proposals_icon, 'layers') }}
@@ -32,9 +32,9 @@
                                     </div>
                                 </div>
                             </div>
-                        @endif
+                        @endif --}}
                         @if (!empty($enable_package) && $enable_package === 'true')
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                 <div class="wt-insightsitem wt-dashboardbox user_current_package">
                                     <countdown
                                     date="{{$expiry_date}}"
@@ -47,7 +47,7 @@
                                 </div>
                             </div>
                         @endif
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4">
                             <div class="wt-insightsitem wt-dashboardbox">
                                 <figure class="wt-userlistingimg">
                                     {{ Helper::getImages('uploads/settings/icon',$latest_saved_item_icon, 'lnr lnr-heart') }}
@@ -60,8 +60,8 @@
                                 </div>
                             </div>
                         </div>
-                        @if ($access_type == 'jobs' || $access_type== 'both')
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                        {{-- @if ($access_type == 'jobs' || $access_type== 'both')
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                 <div class="wt-insightsitem wt-dashboardbox">
                                     <figure class="wt-userlistingimg">
                                         {{ Helper::getImages('uploads/settings/icon',$latest_cancel_job_icon, 'cross-circle') }}
@@ -74,7 +74,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                 <div class="wt-insightsitem wt-dashboardbox">
                                     <figure class="wt-userlistingimg">
                                         {{ Helper::getImages('uploads/settings/icon',$latest_ongoing_job_icon, 'cloud-sync') }}
@@ -88,7 +88,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                 <div class="wt-insightsitem wt-dashboardbox">
                                     <figure class="wt-userlistingimg">
                                         {{ Helper::getImages('uploads/settings/icon',$latest_completed_job_icon, 'checkmark-circle') }}
@@ -102,7 +102,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                 <div class="wt-insightsitem wt-dashboardbox">
                                     <figure class="wt-userlistingimg">
                                         {{ Helper::getImages('uploads/settings/icon',$latest_posted_job_icon, 'enter') }}
@@ -116,9 +116,9 @@
                                     </div>
                                 </div>
                             </div>
-                        @endif
-                        @if ($access_type == 'services' || $access_type== 'both')
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                        @endif --}}
+                        {{-- @if ($access_type == 'services' || $access_type== 'both')
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                 <div class="wt-insightsitem wt-dashboardbox">
                                     <figure class="wt-userlistingimg">
                                         {{ Helper::getImages('uploads/settings/icon',$ongoing_services_icon, 'gift') }}
@@ -132,7 +132,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                 <div class="wt-insightsitem wt-dashboardbox">
                                     <figure class="wt-userlistingimg">
                                         {{ Helper::getImages('uploads/settings/icon',$completed_services_icon, 'gift') }}
@@ -146,7 +146,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                 <div class="wt-insightsitem wt-dashboardbox">
                                     <figure class="wt-userlistingimg">
                                         {{ Helper::getImages('uploads/settings/icon',$cancelled_services_icon, 'gift') }}
@@ -160,12 +160,12 @@
                                     </div>
                                 </div>
                             </div>
-                        @endif
+                        @endif --}}
                     </div>
                 </div>
             </div>
         </div>
-        @if ($access_type == 'jobs' || $access_type== 'both')
+        {{-- @if ($access_type == 'jobs' || $access_type== 'both')
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="wt-dashboardbox wt-ongoingproject la-ongoing-projects wt-earningsholder">
@@ -225,6 +225,6 @@
                     </div>
                 </div>
             </div>
-        @endif
+        @endif --}}
     </section>
 @endsection

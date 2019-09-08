@@ -98,219 +98,24 @@
                                         </div>
                                     <?php endif; ?>
                                 </div>
-                                <div id="wt-statistics" class="wt-statistics wt-profilecounter">
-                                    <div class="wt-statisticcontent wt-countercolor1">
-                                        <h3 data-from="0" data-to="<?php echo e(Helper::getProposals($user->id, 'hired')->count()); ?>" data-speed="800" data-refresh-interval="03"><?php echo e(Helper::getProposals($user->id, 'hired')->count()); ?></h3>
-                                        <h4><?php echo e(trans('lang.ongoing_project')); ?></h4>
-                                    </div>
-                                    <div class="wt-statisticcontent wt-countercolor2">
-                                        <h3 data-from="0" data-to="<?php echo e(Helper::getProposals($user->id, 'completed')->count()); ?>" data-speed="8000" data-refresh-interval="100"><?php echo e(Helper::getProposals($user->id, 'completed')->count()); ?></h3>
-                                        <h4><?php echo e(trans('lang.completed_projects')); ?></h4>
-                                    </div>
-                                    <div class="wt-statisticcontent wt-countercolor4">
-                                        <h3 data-from="0" data-to="<?php echo e(Helper::getProposals($user->id, 'cancelled')->count()); ?>" data-speed="800" data-refresh-interval="02"><?php echo e(Helper::getProposals($user->id, 'cancelled')->count()); ?></h3>
-                                        <h4><?php echo e(trans('lang.cancelled_projects')); ?></h4>
-                                    </div>
-                                    <div class="wt-statisticcontent wt-countercolor3">
-                                        <h3 data-from="0" data-to="<?php echo e($amount); ?>" data-speed="8000" data-refresh-interval="100"><?php echo e(empty($amount) ? $symbol.'0.00' : $symbol."".$amount); ?></h3>
-                                        <h4><?php echo e(trans('lang.total_earnings')); ?></h4>
-                                    </div>
-                                    <div class="wt-description">
-                                        <p><?php echo e(trans('lang.send_offer_note')); ?></p>
-                                        <a href="javascript:void(0);" @click.prevent='sendOffer("<?php echo e($auth_user); ?>")' class="wt-btn"><?php echo e(trans('lang.btn_send_offer')); ?></a>
-                                    </div>
-                                </div>
+                                
+                                    
+                                    
+                                    
+                                
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container">
-            <div class="row">	
-                <div class="col-12 col-sm-12 col-md-12 col-lg-12 float-left">
-                    <div class="wt-services-holder">
-                        <div class="wt-title">
-                            <h2><?php echo e(trans('lang.services')); ?></h2>
-                        </div>
-                        <div class="wt-services-content">
-                            <div class="row">
-                                <?php if(!empty($services)): ?>
-                                    <?php $__currentLoopData = $services; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $service): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <?php 
-                                            $service_reviews = Helper::getServiceReviews($user->id, $service->id); 
-                                            $service_rating  = $service_reviews->sum('avg_rating') != 0 ? round($service_reviews->sum('avg_rating') / $service_reviews->count()) : 0;
-                                            $attachments = Helper::getUnserializeData($service->attachments);
-                                            $no_attachments = empty($attachments) ? 'la-service-info' : '';
-                                            $total_orders = Helper::getServiceCount($service->id, 'hired');
-                                        ?>
-                                        <div class="col-12 col-sm-12 col-md-6 col-lg-4 float-left">
-                                            <div class="wt-freelancers-info <?php echo e($no_attachments); ?>">
-                                                <?php if(!empty($attachments)): ?>
-                                                    <?php $enable_slider = count($attachments) > 1 ? 'wt-freelancerslider owl-carousel' : ' '; ?>
-                                                    <div class="wt-freelancers <?php echo e($enable_slider); ?>">
-                                                        <?php $__currentLoopData = $attachments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $attachment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                            <figure class="item">
-                                                                <a href="<?php echo e(url('profile/'.$user->slug)); ?>"><img src="<?php echo e(asset(Helper::getImageWithSize('uploads/services/'.$user->id, $attachment, 'medium'))); ?>" alt="img description" class="item"></a>
-                                                            </figure>
-                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                    </div>
-                                                <?php endif; ?>
-                                                <?php if($service->is_featured == 'true'): ?>
-                                                    <span class="wt-featuredtagvtwo"><?php echo e(trans('lang.featured')); ?></span>
-                                                <?php endif; ?>
-                                                <div class="wt-freelancers-details">
-                                                    <figure class="wt-freelancers-img">
-                                                        <img src="<?php echo e(asset(Helper::getProfileImage($user->id))); ?>" alt="img description">
-                                                    </figure>
-                                                    <div class="wt-freelancers-content">
-                                                        <div class="dc-title">
-                                                            <a href="<?php echo e(url('profile/'.$user->slug)); ?>"><i class="fa fa-check-circle"></i> <?php echo e(Helper::getUserName($user->id)); ?></a>
-                                                            <a href="<?php echo e(url('service/'.$service->slug)); ?>"><h3><?php echo e($service->title); ?></h3></a>
-                                                            <span><strong><?php echo e($symbol); ?><?php echo e($service->price); ?></strong> <?php echo e(trans('lang.starting_from')); ?></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="wt-freelancers-rating">
-                                                        <ul>
-                                                            <li><span><i class="fa fa-star"></i><?php echo e($service_rating); ?>/<i>5</i> (<?php echo e($service_reviews->count()); ?>)</span></li>
-                                                            <li>
-                                                                <?php if($total_orders > 0): ?>
-                                                                    <i class="fa fa-spinner fa-spin"></i>
-                                                                <?php endif; ?>
-                                                                <?php echo e($total_orders); ?> <?php echo e(trans('lang.in_queue')); ?>
-
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
         <div class="container">
             <div class="row">
                 <div id="wt-twocolumns" class="wt-twocolumns wt-haslayout">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7 col-xl-8 float-left">
                         <div class="wt-usersingle">
-                            <div class="wt-clientfeedback la-no-record">
-                                <div class="wt-usertitle wt-titlewithselect">
-                                    <h2><?php echo e(trans('lang.client_feedback')); ?></h2>
-                                </div>
-                                <?php if(!empty($reviews) && $reviews->count() > 0): ?>
-                                    <?php $__currentLoopData = $reviews; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $review): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <?php
-                                            if ($review->project_type == 'job') {
-                                                $job = \App\Job::where('id', $review->job_id)->first();
-                                            } 
-                                            else {
-                                                $review_service = Helper::getPivotService($review->job_id);
-                                                $service = \App\Service::where('id', $review_service->service_id)->first();
-                                            }
-                                            $user = App\User::find($review->user_id);
-                                            $stars  = $review->avg_rating != 0 ? $review->avg_rating/5*100 : 0;
-                                        ?>
-                                        <?php if($review->project_type == 'job'): ?>
-                                            <?php if(!empty($job->employer) && $job->employer->count() > 0): ?>
-                                                <div class="wt-userlistinghold wt-userlistingsingle">
-                                                    <figure class="wt-userlistingimg">
-                                                        <img src="<?php echo e(asset(Helper::getProfileImage($review->user_id))); ?>" alt="<?php echo e(trans('Employer')); ?>">
-                                                    </figure>
-                                                    <div class="wt-userlistingcontent">
-                                                        <div class="wt-contenthead">
-                                                            <div class="wt-title">
-                                                                <a href="<?php echo e(url('profile/'.$job->employer->slug)); ?>"><?php if($user->user_verified === 1): ?><i class="fa fa-check-circle"></i><?php endif; ?> <?php echo e(Helper::getUserName($review->user_id)); ?></a>
-                                                                <h3><?php echo e($job->title); ?></h3>
-                                                            </div>
-                                                            <ul class="wt-userlisting-breadcrumb">
-                                                                <li><span><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i> <?php echo e(\App\Helper::getProjectLevel($job->project_level)); ?></span></li>
-                                                                <li>
-                                                                    <span>
-                                                                        <img src="<?php echo e(asset(App\Helper::getLocationFlag($job->location->flag))); ?>" alt="<?php echo e(trans('lang.flag_img')); ?>"> <?php echo e($job->location->title); ?>
-
-                                                                    </span>
-                                                                </li>
-                                                                <li><span><i class="far fa-calendar"></i> <?php echo e(Carbon\Carbon::parse($job->created_at)->format('M Y')); ?> - <?php echo e(Carbon\Carbon::parse($job->updated_at)->format('M Y')); ?></span></li>
-                                                                <li>
-                                                                    <span class="wt-stars"><span style="width: <?php echo e($stars); ?>%;"></span></span>
-                                                                    
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="wt-description">
-                                                        <?php if(!empty($review->feedback)): ?>
-                                                            <p>“ <?php echo e($review->feedback); ?> ”</p>
-                                                        <?php endif; ?>
-                                                    </div>
-                                                </div>
-                                            <?php endif; ?>
-                                        <?php else: ?>
-                                            <div class="wt-userlistinghold wt-userlistingsingle">
-                                                <figure class="wt-userlistingimg">
-                                                    <img src="<?php echo e(asset(Helper::getProfileImage($review->user_id))); ?>" alt="<?php echo e(trans('Employer')); ?>">
-                                                </figure>
-                                                <div class="wt-userlistingcontent">
-                                                    <div class="wt-contenthead">
-                                                        <div class="wt-title">
-                                                            <a href="<?php echo e(url('profile/'.$user->slug)); ?>"><?php if($user->user_verified == 1): ?><i class="fa fa-check-circle"></i><?php endif; ?> <?php echo e(Helper::getUserName($review->user_id)); ?></a>
-                                                            <h3><?php echo e($service->title); ?></h3>
-                                                        </div>
-                                                        <ul class="wt-userlisting-breadcrumb">
-                                                            <?php if(!empty($service->location)): ?>
-                                                                <li>
-                                                                    <span>
-                                                                        <img src="<?php echo e(asset(Helper::getLocationFlag($service->location->flag))); ?>" alt="<?php echo e(trans('lang.flag_img')); ?>"> <?php echo e($service->location->title); ?>
-
-                                                                    </span>
-                                                                </li>
-                                                            <?php endif; ?>
-                                                            <li><span><i class="far fa-calendar"></i> <?php echo e(Carbon\Carbon::parse($service->created_at)->format('M Y')); ?> - <?php echo e(Carbon\Carbon::parse($service->updated_at)->format('M Y')); ?></span></li>
-                                                            <li>
-                                                                <span class="wt-stars"><span style="width: <?php echo e($stars); ?>%;"></span></span>
-                                                            </li> 
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="wt-description">
-                                                    <?php if(!empty($review->feedback)): ?>
-                                                        <p>“ <?php echo e($review->feedback); ?> ”</p>
-                                                    <?php endif; ?>
-                                                </div>
-                                            </div>
-                                        <?php endif; ?>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                <?php else: ?>
-                                    <div class="wt-userprofile">
-                                        <?php if(file_exists(resource_path('views/extend/errors/no-record.blade.php'))): ?> 
-                                            <?php echo $__env->make('extend.errors.no-record', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-                                        <?php else: ?> 
-                                            <?php echo $__env->make('errors.no-record', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-                                        <?php endif; ?>
-                                    </div>
-                                <?php endif; ?>
-                            </div>
-                            <div class="wt-craftedprojects">
-                                <div class="wt-usertitle">
-                                    <h2><?php echo e(trans('lang.crafted_projects')); ?></h2>
-                                </div>
-                                <?php if(!empty($projects)): ?>
-                                    <crafted_project :no_of_post="3" :project="'<?php echo e(json_encode($projects)); ?>'" :freelancer_id="'<?php echo e($profile->user_id); ?>'" :img="'<?php echo e(trans('lang.img')); ?>'"></crafted_project>
-                                <?php else: ?>
-                                    <div class="wt-userprofile">
-                                        <?php if(file_exists(resource_path('views/extend/errors/no-record.blade.php'))): ?> 
-                                            <?php echo $__env->make('extend.errors.no-record', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-                                        <?php else: ?> 
-                                            <?php echo $__env->make('errors.no-record', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-                                        <?php endif; ?>
-                                    </div>
-                                <?php endif; ?>
-                            </div>
+                            
                             <div class="wt-experience">
                                 <div class="wt-usertitle">
                                     <h2><?php echo e(trans('lang.experience')); ?></h2>

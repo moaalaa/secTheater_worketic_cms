@@ -213,14 +213,14 @@ jQuery(document).ready(function () {
 
 
 // -------------------------------- Posts Vue ---------------------------------
-
-new Vue({
-    el: '#posts-app',
-    mounted: function () {
-        console.log('Mounted POsts App');
-    },
-});
-
+if (document.getElementById("posts-app")) {
+    new Vue({
+        el: '#posts-app',
+        mounted: function () {
+            console.log('Mounted POsts App');
+        },
+    });
+}
 // -------------------------------- End Posts Vue ------------------------------
 
 if (document.getElementById("wt-header")) {

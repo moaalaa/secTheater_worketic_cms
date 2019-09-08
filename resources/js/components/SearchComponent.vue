@@ -82,7 +82,7 @@
 </template>
 <script>
  export default{
-    props: ['widget_type', 'no_record_message', 'placeholder', 'freelancer_placeholder', 'employer_placeholder', 'job_placeholder', 'service_placeholder'],
+    props: ['widget_type', 'no_record_message', 'placeholder', 'freelancer_placeholder', 'employer_placeholder'],
         data(){
             return {
                 filters:[],
@@ -107,11 +107,12 @@
                     this.selected_type = this.freelancer_placeholder;
                 } else if(type == 'employer') {
                     this.selected_type = this.employer_placeholder;
-                } else if(type == 'job') {
-                    this.selected_type = this.job_placeholder;
-                } else if(type == 'service') {
-                    this.selected_type = this.service_placeholder;
-                }
+                } 
+                // else if(type == 'job') {
+                //     this.selected_type = this.job_placeholder;
+                // } else if(type == 'service') {
+                //     this.selected_type = this.service_placeholder;
+                // }
             },
             getFilters(){
                 let self = this;
@@ -136,11 +137,12 @@
                         self.searchable_data = response.data.searchables;
                     } else if (type == 'employer') {
                         self.searchable_data = response.data.searchables;
-                    } else if (type == 'job') {
-                        self.searchable_data = response.data.searchables;
-                    } else if (type == 'service') {
-                        self.searchable_data = response.data.searchables;
                     }
+                    //  else if (type == 'job') {
+                    //     self.searchable_data = response.data.searchables;
+                    // } else if (type == 'service') {
+                    //     self.searchable_data = response.data.searchables;
+                    // }
                 });
             },
             emptyField:function(types){
@@ -170,11 +172,12 @@
                         type = 'freelancer';
                     } else if(type == 'Employers') {
                         type = 'employer';
-                    } else if(type == 'Jobs') {
-                        type = 'job';
-                    } else if(type == 'Services') {
-                        type = 'service';
-                    }
+                    } 
+                    // else if(type == 'Jobs') {
+                    //     type = 'job';
+                    // } else if(type == 'Services') {
+                    //     type = 'service';
+                    // }
                     jQuery('.search-field').parents('.form-group').find('span.no-record-span').css("display", "none");
                     jQuery('.wt-related-result').remove();
                     var html = '<a href="'+this.url+'?s='+keyword+'&type='+type+'" class="wt-related-result"><span v-if="related_results">show all result related to'+' <em>'+ keyword+'</em></span></a>';
@@ -205,23 +208,24 @@
                             type = 'freelancer';
                     }   else if(type == 'Employers') {
                             type = 'employer';
-                    }   else if(type == 'Jobs') {
-                            type = 'job';
-                    } else if(type == 'Services') {
-                            type = 'service';
-                    }
+                    }   
+                    // else if(type == 'Jobs') {
+                    //         type = 'job';
+                    // } else if(type == 'Services') {
+                    //         type = 'service';
+                    // }
                 }
                 if (this.$refs.searchfield.inputValue != '') {
                     let slug = document.getElementById('hidden_field').value;
                     let keyword = this.query;
-                    if (type == 'job') {
-                        window.location.replace(APP_URL+'/job/'+slug);
-                    } else if (type == 'service'){
-                        window.location.replace(APP_URL+'/service/'+slug);
-                    } 
-                    else {
+                    // if (type == 'job') {
+                    //     window.location.replace(APP_URL+'/job/'+slug);
+                    // } else if (type == 'service'){
+                    //     window.location.replace(APP_URL+'/service/'+slug);
+                    // } 
+                    // else {
                         window.location.replace(APP_URL+'/profile/'+slug);
-                    }
+                    // }
                 } else {
                     window.location.replace(APP_URL+'/search-results?type='+type);
                 }

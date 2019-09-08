@@ -172,78 +172,7 @@
                                     <?php echo htmlspecialchars_decode(stripslashes($profile->description)); ?>
                                 </div>
                             </div>
-                            <?php if(!empty($jobs) && $jobs->count() > 0): ?>
-                                <?php $__currentLoopData = $jobs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $job): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <?php
-                                        $job = \App\Job::find($job->id);
-                                        $description = strip_tags(stripslashes($job->description));
-                                        $featured_class = $job->is_featured == 'true' ? 'wt-featured' : '';
-                                        $project_type  = Helper::getProjectTypeList($job->project_type);
-                                    ?>
-                                    <div class="wt-userlistinghold wt-userlistingholdvtwo <?php echo e($featured_class); ?>">
-                                        <?php if($job->is_featured == 'true'): ?>
-                                            <span class="wt-featuredtag"><img src="<?php echo e(asset('images/featured.png')); ?>" alt="<?php echo e(trans('lang.is_featured')); ?>" data-tipso="Plus Member" class="template-content tipso_style"></span>
-                                        <?php endif; ?>
-                                        <div class="wt-userlistingcontent">
-                                            <div class="wt-contenthead">
-                                                <div class="wt-title">
-                                                    <a href="<?php echo e(url('profile/'.$job->employer->slug)); ?>">
-                                                        <?php if($job->employer->user_verified === 1): ?>
-                                                            <i class="fa fa-check-circle"></i>
-                                                        <?php endif; ?>
-                                                        <?php echo e($job->employer->first_name.' '.$job->employer->last_name); ?>
-
-                                                    </a>
-                                                    <h2><?php echo e($job->title); ?></h2>
-                                                </div>
-                                                <div class="wt-description">
-                                                    <p><?php echo htmlspecialchars_decode(stripslashes(str_limit($description, 200))); ?></p>
-                                                </div>
-                                                <div class="wt-tag wt-widgettag">
-                                                    <?php $__currentLoopData = $job->skills; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $skill): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                        <a href="<?php echo e(url('search-results?type=job&skills%5B%5D='.$skill->slug)); ?>"><?php echo e($skill->title); ?></a>
-                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                </div>
-                                            </div>
-                                            <div class="wt-viewjobholder">
-                                                <ul>
-                                                    <li><span><i class="wt-viewjobdollar"><?php echo e(!empty($symbol) ? $symbol['symbol'] : '$'); ?></i><?php echo e($job->price); ?></span></li>
-                                                    <?php if(!empty($job->location->title)): ?>
-                                                        <li><span><img src="<?php echo e(asset(App\Helper::getLocationFlag($job->location->flag))); ?>" alt="<?php echo e(trans('lang.location')); ?>"> <?php echo e($job->location->title); ?></span></li>
-                                                    <?php endif; ?>
-                                                    <li><span><i class="far fa-folder wt-viewjobfolder"></i><?php echo e(trans('lang.type')); ?> <?php echo e($project_type); ?></span></li>
-                                                    <li><span><i class="far fa-clock wt-viewjobclock"></i><?php echo e(Helper::getJobDurationList($job->duration)); ?></span></li>
-                                                    <li><span><i class="fa fa-tag wt-viewjobtag"></i><?php echo e(trans('lang.job_id')); ?> <?php echo e($job->code); ?></span></li>
-
-                                                    <?php if(!empty($save_jobs) && in_array($job->id, $save_jobs)): ?>
-                                                        <li style="pointer-events: none;"><a href="javascript:void(0);" class="wt-clicklike wt-clicksave">
-                                                            <i class="fa fa-heart"></i> <?php echo e(trans("lang.saved")); ?></a>
-                                                        </li>
-                                                    <?php else: ?>
-                                                        <li>
-                                                            <a href="javascrip:void(0);" class="wt-clicklike" id="job-<?php echo e($job->id); ?>" @click.prevent="add_wishlist('job-<?php echo e($job->id); ?>', <?php echo e($job->id); ?>, 'saved_jobs', '<?php echo e(trans("lang.saved")); ?>')" v-cloak>
-                                                                <i class="fa fa-heart"></i>
-                                                                <span class="save_text">Click to Save</span>
-                                                            </a>
-                                                        </li>
-                                                    <?php endif; ?>
-                                                    <li class="wt-btnarea"><a href="<?php echo e(url('job/'.$job->slug)); ?>" class="wt-btn"><?php echo e(trans('lang.view_job')); ?></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                <?php if( method_exists($jobs,'links') ): ?>
-                                    <?php echo e($jobs->links('pagination.custom')); ?>
-
-                                <?php endif; ?>
-                            <?php else: ?>
-                                <?php if(file_exists(resource_path('views/extend/errors/no-record.blade.php'))): ?>
-                                    <?php echo $__env->make('extend.errors.no-record', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-                                <?php else: ?>
-                                    <?php echo $__env->make('errors.no-record', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-                                <?php endif; ?>
-                            <?php endif; ?>
+                            
                         </div>
                     </div>
                 </div>

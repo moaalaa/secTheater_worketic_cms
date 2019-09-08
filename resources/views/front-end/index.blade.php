@@ -52,8 +52,8 @@
                             :placeholder="'{{ trans('lang.looking_for') }}'"
                             :freelancer_placeholder="'{{ trans('lang.search_filter_list.freelancer') }}'"
                             :employer_placeholder="'{{ trans('lang.search_filter_list.employers') }}'"
-                            :job_placeholder="'{{ trans('lang.search_filter_list.jobs') }}'"
-                            :service_placeholder="'{{ trans('lang.search_filter_list.services') }}'"
+                            {{-- :job_placeholder="'{{ trans('lang.search_filter_list.jobs') }}'"
+                            :service_placeholder="'{{ trans('lang.search_filter_list.services') }}'" --}}
                             :no_record_message="'{{ trans('lang.no_record') }}'"
                             >
                             </search-form>
@@ -258,7 +258,7 @@
                 </div>
             </section>
         @endif
-        @if ($skills->count() > 0
+        {{-- @if ($skills->count() > 0
             || $categories->count() > 0
             || $locations->count() > 0
             || $languages->count() > 0)
@@ -334,7 +334,7 @@
                     </div>
                 </div>
             </section>
-        @endif
+        @endif --}}
     </div>
 @endsection
 @push('scripts')

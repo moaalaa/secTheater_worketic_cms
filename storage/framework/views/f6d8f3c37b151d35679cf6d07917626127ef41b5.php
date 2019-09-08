@@ -52,8 +52,7 @@
                             :placeholder="'<?php echo e(trans('lang.looking_for')); ?>'"
                             :freelancer_placeholder="'<?php echo e(trans('lang.search_filter_list.freelancer')); ?>'"
                             :employer_placeholder="'<?php echo e(trans('lang.search_filter_list.employers')); ?>'"
-                            :job_placeholder="'<?php echo e(trans('lang.search_filter_list.jobs')); ?>'"
-                            :service_placeholder="'<?php echo e(trans('lang.search_filter_list.services')); ?>'"
+                            
                             :no_record_message="'<?php echo e(trans('lang.no_record')); ?>'"
                             >
                             </search-form>
@@ -259,83 +258,7 @@
                 </div>
             </section>
         <?php endif; ?>
-        <?php if($skills->count() > 0
-            || $categories->count() > 0
-            || $locations->count() > 0
-            || $languages->count() > 0): ?>
-            <section class="wt-haslayaout wt-main-section wt-footeraboutus">
-                <div class="container">
-                    <div class="row">
-                        <?php if(Helper::getAccessType() != 'services'): ?>
-                            <?php if($skills->count() > 0): ?>
-                                <div class="col-12 col-sm-6 col-md-3 col-lg-3">
-                                    <div class="wt-widgetskills">
-                                        <div class="wt-fwidgettitle">
-                                            <h3><?php echo e(trans('lang.by_skills')); ?></h3>
-                                        </div>
-                                        <?php if(!empty($skills)): ?>
-                                            <ul class="wt-fwidgetcontent">
-                                                <?php $__currentLoopData = $skills; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $skill): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                    <li><a href="<?php echo e(url('search-results?type=job&skills%5B%5D='.$skill->slug)); ?>"><?php echo e($skill->title); ?></a></li>
-                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                            </ul>
-                                        <?php endif; ?>
-                                    </div>
-                                </div>
-                            <?php endif; ?>
-                        <?php endif; ?>
-                        <?php if($categories->count() > 0): ?>
-                            <div class="col-12 col-sm-6 col-md-3 col-lg-3">
-                                <div class="wt-footercol wt-widgetcategories">
-                                    <div class="wt-fwidgettitle">
-                                        <h3><?php echo e(trans('lang.by_cats')); ?></h3>
-                                    </div>
-                                    <?php if(!empty($categories)): ?>
-                                        <ul class="wt-fwidgetcontent">
-                                            <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <li><a href="<?php echo e(url('search-results?type='.$type.'&category%5B%5D='.$category->slug)); ?>"><?php echo e($category->title); ?></a></li>
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                        </ul>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-                        <?php endif; ?>
-                        <?php if($locations->count() > 0): ?>
-                            <div class="col-12 col-sm-6 col-md-3 col-lg-3">
-                                <div class="wt-widgetbylocation">
-                                    <div class="wt-fwidgettitle">
-                                        <h3><?php echo e(trans('lang.by_locs')); ?></h3>
-                                    </div>
-                                    <?php if(!empty($locations)): ?>
-                                        <ul class="wt-fwidgetcontent">
-                                            <?php $__currentLoopData = $locations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $location): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <li><a href="<?php echo e(url('search-results?type='.$type.'&locations%5B%5D='.$location->slug)); ?>"><?php echo e($location->title); ?></a></li>
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                        </ul>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-                        <?php endif; ?>
-                        <?php if($languages->count() > 0): ?>
-                            <div class="col-12 col-sm-6 col-md-3 col-lg-3">
-                                <div class="wt-widgetbylocation">
-                                    <div class="wt-fwidgettitle">
-                                        <h3><?php echo e(trans('lang.by_lang')); ?></h3>
-                                    </div>
-                                    <?php if(!empty($languages)): ?>
-                                        <ul class="wt-fwidgetcontent">
-                                            <?php $__currentLoopData = $languages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $language): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <li><a href="<?php echo e(url('search-results?type='.$type.'&languages%5B%5D='.$language->slug)); ?>"><?php echo e($language->title); ?></a></li>
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                        </ul>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            </section>
-        <?php endif; ?>
+        
     </div>
 <?php $__env->stopSection(); ?>
 <?php $__env->startPush('scripts'); ?>

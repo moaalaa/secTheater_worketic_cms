@@ -34,13 +34,13 @@
                     </div>
                     @if ($role === 'employer')
                     @if (Helper::getAccessType() == 'both' || Helper::getAccessType() == 'jobs')
-                        <div class="wt-btnarea"><a href="{{{ url(route('employerPostJob')) }}}" class="wt-btn">{{{ trans('lang.post_job') }}}</a></div>
+                        {{-- <div class="wt-btnarea"><a href="{{{ url(route('employerPostJob')) }}}" class="wt-btn">{{{ trans('lang.post_job') }}}</a></div> --}}
                     @else
                         <div class="wt-btnarea"><a href="{{{ url(route('showUserProfile', ['slug' => Auth::user()->slug])) }}}" class="wt-btn">{{{ trans('lang.view_profile') }}}</a></div>
                     @endif
                     @elseif ($role === 'freelancer')
                         @if (Helper::getAccessType() == 'both' || Helper::getAccessType() == 'services')
-                            <div class="wt-btnarea"><a href="{{{ url(route('freelancerPostService')) }}}" class="wt-btn">{{{ trans('lang.post_service') }}}</a></div>
+                            {{-- <div class="wt-btnarea"><a href="{{{ url(route('freelancerPostService')) }}}" class="wt-btn">{{{ trans('lang.post_service') }}}</a></div> --}}
                         @else
                             <div class="wt-btnarea"><a href="{{{ url(route('showUserProfile', ['slug' => Auth::user()->slug])) }}}" class="wt-btn">{{{ trans('lang.view_profile') }}}</a></div>
                         @endif
@@ -50,13 +50,19 @@
             <nav id="wt-navdashboard" class="wt-navdashboard">
                 <ul>
                     @if ($role === 'admin')
-                        <li>
+                        {{-- <li>
                             <a href="{{{ route('allJobs') }}}">
                                 <i class="ti-briefcase"></i>
                                 <span>{{ trans('lang.all_jobs') }}</span>
                             </a>
+                        </li> --}}
+                        <li>
+                            <a href="{{{ route('admin.posts.adminIndex') }}}">
+                                <i class="ti-briefcase"></i>
+                                <span>{{ trans('lang.posts') }}</span>
+                            </a>
                         </li>
-                        @if (Helper::getAccessType() == 'both' || Helper::getAccessType() == 'services')
+                        {{-- @if (Helper::getAccessType() == 'both' || Helper::getAccessType() == 'services')
                             <li>
                                 <a href="{{{ route('allServices') }}}">
                                     <i class="ti-briefcase"></i>
@@ -69,7 +75,7 @@
                                     <span>{{ trans('lang.service_orders') }}</span>
                                 </a>
                             </li>
-                        @endif
+                        @endif --}}
                         <li>
                             <a href="{{{ route('reviewOptions') }}}">
                                 <i class="ti-check-box"></i>
@@ -138,8 +144,7 @@
                             </a>
                             <ul class="sub-menu">
                                 <li><hr><a href="{{{ route('skills') }}}">{{ trans('lang.skills') }}</a></li>
-                                <li><hr><a href="{{{ route('categories') }}}">{{ trans('lang.job_cats') }}</a></li>
-                                <li><hr><a href="{{{ route('admin.posts.adminIndex') }}}">{{ trans('lang.posts') }}</a></li>
+                                <li><hr><a href="{{{ route('categories') }}}">{{ trans('lang.cats') }}</a></li>
                                 <li><hr><a href="{{{ route('departments') }}}">{{ trans('lang.dpts') }}</a></li>
                                 <li><hr><a href="{{{ route('languages') }}}">{{ trans('lang.langs') }}</a></li>
                                 <li><hr><a href="{{{ route('locations') }}}">{{ trans('lang.locations') }}</a></li>
@@ -174,7 +179,7 @@
                             </ul>
                         </li>
                         @if ($role === 'employer')
-                            @if (Helper::getAccessType() == 'both' || Helper::getAccessType() == 'jobs')
+                            {{-- @if (Helper::getAccessType() == 'both' || Helper::getAccessType() == 'jobs')
                                 <li class="menu-item-has-children">
                                     <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
                                     <a href="javascript:void(0)">
@@ -187,8 +192,8 @@
                                         <li><hr><a href="{{{ url('employer/jobs/hired') }}}">{{ trans('lang.ongoing_jobs') }}</a></li>
                                     </ul>
                                 </li>
-                            @endif
-                            @if (Helper::getAccessType() == 'both' || Helper::getAccessType() == 'services')
+                            @endif --}}
+                            {{-- @if (Helper::getAccessType() == 'both' || Helper::getAccessType() == 'services')
                                 <li class="menu-item-has-children">
                                     <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
                                     <a href="javascript:void(0)">
@@ -201,7 +206,7 @@
                                         <li><hr><a href="{{{ url('employer/services/cancelled') }}}">{{ trans('lang.cancelled_services') }}</a></li>
                                     </ul>
                                 </li>
-                            @endif
+                            @endif --}}
                             <li>
                                 <a href="{{{ route('employerPayoutsSettings') }}}">
                                     <i class="ti-money"></i>
@@ -230,7 +235,7 @@
                                 </li>
                             @endif
                         @elseif ($role === 'freelancer')
-                            <li class="menu-item-has-children">
+                            {{-- <li class="menu-item-has-children">
                                 <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
                                 <a href="javascript:void(0)">
                                     <i class="ti-briefcase"></i>
@@ -241,8 +246,8 @@
                                     <li><hr><a href="{{{ url('freelancer/jobs/cancelled') }}}">{{ trans('lang.cancelled_projects') }}</a></li>
                                     <li><hr><a href="{{{ url('freelancer/jobs/hired') }}}">{{ trans('lang.ongoing_projects') }}</a></li>
                                 </ul>
-                            </li>
-                            @if (Helper::getAccessType() == 'both' || Helper::getAccessType() == 'services')
+                            </li> --}}
+                            {{-- @if (Helper::getAccessType() == 'both' || Helper::getAccessType() == 'services')
                                 <li class="menu-item-has-children">
                                     <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
                                     <a href="javascript:void(0)">
@@ -256,7 +261,7 @@
                                         <li><hr><a href="{{{ route('ServiceListing', ['status'=>'cancelled']) }}}">{{ trans('lang.cancelled_services') }}</a></li>
                                     </ul>
                                 </li>
-                            @endif
+                            @endif --}}
                             <li>
                                 <a href="{{{ route('showFreelancerProposals') }}}">
                                     <i class="ti-bookmark-alt"></i>

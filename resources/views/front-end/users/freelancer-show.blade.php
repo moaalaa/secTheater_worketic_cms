@@ -98,8 +98,8 @@
                                         </div>
                                     @endif
                                 </div>
-                                <div id="wt-statistics" class="wt-statistics wt-profilecounter">
-                                    <div class="wt-statisticcontent wt-countercolor1">
+                                {{-- <div id="wt-statistics" class="wt-statistics wt-profilecounter"> --}}
+                                    {{-- <div class="wt-statisticcontent wt-countercolor1">
                                         <h3 data-from="0" data-to="{{{ Helper::getProposals($user->id, 'hired')->count() }}}" data-speed="800" data-refresh-interval="03">{{{ Helper::getProposals($user->id, 'hired')->count() }}}</h3>
                                         <h4>{{ trans('lang.ongoing_project') }}</h4>
                                     </div>
@@ -110,23 +110,23 @@
                                     <div class="wt-statisticcontent wt-countercolor4">
                                         <h3 data-from="0" data-to="{{{ Helper::getProposals($user->id, 'cancelled')->count() }}}" data-speed="800" data-refresh-interval="02">{{{ Helper::getProposals($user->id, 'cancelled')->count() }}}</h3>
                                         <h4>{{ trans('lang.cancelled_projects') }}</h4>
-                                    </div>
-                                    <div class="wt-statisticcontent wt-countercolor3">
+                                    </div> --}}
+                                    {{-- <div class="wt-statisticcontent wt-countercolor3">
                                         <h3 data-from="0" data-to="{{ $amount }}" data-speed="8000" data-refresh-interval="100">{{ empty($amount) ? $symbol.'0.00' : $symbol."".$amount }}</h3>
                                         <h4>{{ trans('lang.total_earnings') }}</h4>
-                                    </div>
-                                    <div class="wt-description">
+                                    </div> --}}
+                                    {{-- <div class="wt-description">
                                         <p>{{ trans('lang.send_offer_note') }}</p>
                                         <a href="javascript:void(0);" @click.prevent='sendOffer("{{$auth_user}}")' class="wt-btn">{{{ trans('lang.btn_send_offer') }}}</a>
-                                    </div>
-                                </div>
+                                    </div> --}}
+                                {{-- </div> --}}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container">
+        {{-- <div class="container">
             <div class="row">	
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 float-left">
                     <div class="wt-services-holder">
@@ -191,13 +191,13 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="container">
             <div class="row">
                 <div id="wt-twocolumns" class="wt-twocolumns wt-haslayout">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7 col-xl-8 float-left">
                         <div class="wt-usersingle">
-                            <div class="wt-clientfeedback la-no-record">
+                            {{-- <div class="wt-clientfeedback la-no-record">
                                 <div class="wt-usertitle wt-titlewithselect">
                                     <h2>{{ trans('lang.client_feedback') }}</h2>
                                 </div>
@@ -236,18 +236,7 @@
                                                                 <li><span><i class="far fa-calendar"></i> {{ Carbon\Carbon::parse($job->created_at)->format('M Y') }} - {{ Carbon\Carbon::parse($job->updated_at)->format('M Y') }}</span></li>
                                                                 <li>
                                                                     <span class="wt-stars"><span style="width: {{ $stars }}%;"></span></span>
-                                                                    {{-- <vue-stars
-                                                                    :name="'rating[{{$key}}][rate]'"
-                                                                    :active-color="'#fecb02'"
-                                                                    :inactive-color="'#999999'"
-                                                                    :shadow-color="'#ffff00'"
-                                                                    :hover-color="'#fecb02'"
-                                                                    :max="5"
-                                                                    :value="{{$review->avg_rating}}"
-                                                                    :readonly="true"
-                                                                    :char="'★'"
-                                                                    id="rating-{{$key}}"
-                                                                    /> --}}
+                                                                    
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -318,7 +307,7 @@
                                         @endif
                                     </div>
                                 @endif
-                            </div>
+                            </div> --}}
                             <div class="wt-experience">
                                 <div class="wt-usertitle">
                                     <h2>{{{ trans('lang.experience') }}}</h2>

@@ -5,7 +5,7 @@
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="wt-insightsitemholder">
                     <div class="row">
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                        {{-- <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
                             <div class="wt-insightsitem wt-dashboardbox">
                                 <figure class="wt-userlistingimg">
                                     {{ Helper::getImages('uploads/settings/icon',$latest_proposals_icon, 'layers') }}
@@ -17,7 +17,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         @if (!empty($enable_package) && $enable_package === 'true')
                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
                                 <div class="wt-insightsitem wt-dashboardbox user_current_package">
@@ -59,7 +59,7 @@
                                 </div>
                             </div>
                         </div>
-                        @if ($access_type == 'jobs' || $access_type== 'both')
+                        {{-- @if ($access_type == 'jobs' || $access_type== 'both')
                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
                                 <div class="wt-insightsitem wt-dashboardbox">
                                     <figure class="wt-userlistingimg">
@@ -88,7 +88,7 @@
                                     </div>
                                 </div>
                             </div>
-                        @endif
+                        @endif --}}
                         <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
                             <div class="wt-insightsitem wt-dashboardbox">
                                 <figure class="wt-userlistingimg">
@@ -115,7 +115,7 @@
                                 </div>
                             </div>
                         </div>
-                        @if ($access_type == 'services' || $access_type== 'both')
+                        {{-- @if ($access_type == 'services' || $access_type== 'both')
                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
                                 <div class="wt-insightsitem wt-dashboardbox">
                                     <figure class="wt-userlistingimg">
@@ -172,12 +172,12 @@
                                     </div>
                                 </div>
                             </div>
-                        @endif
+                        @endif --}}
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
+        {{-- <div class="row">
             @if ($access_type == 'jobs' || $access_type== 'both')
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 float-left">
                     <div class="wt-dashboardbox wt-ongoingproject la-ongoing-projects">
@@ -309,6 +309,6 @@
                     @endif
                 </div>
             </div>
-        </div>
+        </div> --}}
     </section>
 @endsection

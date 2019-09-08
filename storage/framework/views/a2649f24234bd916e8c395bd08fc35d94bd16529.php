@@ -25,8 +25,7 @@
                         :placeholder="'<?php echo e(trans('lang.looking_for')); ?>'"
                         :freelancer_placeholder="'<?php echo e(trans('lang.search_filter_list.freelancer')); ?>'"
                         :employer_placeholder="'<?php echo e(trans('lang.search_filter_list.employers')); ?>'"
-                        :job_placeholder="'<?php echo e(trans('lang.search_filter_list.jobs')); ?>'"
-                        :service_placeholder="'<?php echo e(trans('lang.search_filter_list.services')); ?>'"
+                        
                         :no_record_message="'<?php echo e(trans('lang.no_record')); ?>'"
                         >
                         </search-form>
@@ -77,22 +76,13 @@
 
                                         </a>
                                     </li>
-                                <?php if($type =='jobs' || $type == 'both'): ?>
-                                        <li>
-                                            <a href="<?php echo e(url('search-results?type=job')); ?>">
-                                                <?php echo e(trans('lang.browse_jobs')); ?>
-
-                                            </a>
-                                        </li>
-                                    <?php endif; ?>
-                                <?php if($type =='services' || $type == 'both'): ?>
                                     <li>
-                                        <a href="<?php echo e(url('search-results?type=service')); ?>">
-                                            <?php echo e(trans('lang.browse_services')); ?>
+                                        <a href="<?php echo e(route('posts.index')); ?>">
+                                            <?php echo e(trans('lang.posts')); ?>
 
                                         </a>
                                     </li>
-                                <?php endif; ?>
+                                
                                 </ul>
                             </div>
                         </nav>

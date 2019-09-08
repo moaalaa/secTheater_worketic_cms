@@ -43,22 +43,7 @@
                                 </div>
                             </div>
                         <?php endif; ?>
-                        <?php if(!empty($search_menu) || !empty($menu_title)): ?>
-                            <div class="col-12 col-sm-6 col-md-3 col-lg-3">
-                                <div class="wt-footercol wt-widgetcompany">
-                                    <?php if(!empty($menu_title)): ?>
-                                        <div class="wt-fwidgettitle">
-                                            <h3><?php echo e($menu_title->meta_value); ?></h3>
-                                        </div>
-                                    <?php endif; ?>
-                                    <ul class="wt-fwidgetcontent">
-                                        <?php $__currentLoopData = $search_menu; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $page): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <li><a href="<?php echo url($page['url']); ?>"><?php echo e($page['title']); ?></a></li>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    </ul>
-                                </div>
-                            </div>
-                        <?php endif; ?>
+                        
                     </div>
                 </div>
             </div>

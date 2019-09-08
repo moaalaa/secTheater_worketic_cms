@@ -914,18 +914,18 @@ class Helper extends Model
                 'title' => trans('lang.search_filter_list.freelancer'),
                 'value' => 'freelancer',
             ),
-            '1' => array(
-                'title' => trans('lang.search_filter_list.jobs'),
-                'value' => 'job',
-            ),
+            // '1' => array(
+            //     'title' => trans('lang.search_filter_list.jobs'),
+            //     'value' => 'job',
+            // ),
             '2' => array(
                 'title' => trans('lang.search_filter_list.employers'),
                 'value' => 'employer',
             ),
-            '3' => array(
-                'title' => trans('lang.search_filter_list.services'),
-                'value' => 'service',
-            ),
+            // '3' => array(
+            //     'title' => trans('lang.search_filter_list.services'),
+            //     'value' => 'service',
+            // ),
         );
         if (Helper::getAccessType() == 'jobs') {
             return Arr::except($list, [3]);
@@ -2045,7 +2045,7 @@ class Helper extends Model
         $banner  = !empty($banner_settings) && !empty($banner_settings['home_banner']) ? $banner_settings['home_banner'] : '';
         $banner_inner_image  = !empty($banner_settings) && !empty($banner_settings['home_banner_image']) ? $banner_settings['home_banner_image'] : '';
         $banner_title  = !empty($banner_settings) && !empty($banner_settings['banner_title']) ? $banner_settings['banner_title'] : 'Hire expert freelancers';
-        $banner_subtitle  = !empty($banner_settings) && !empty($banner_settings['banner_subtitle']) ? $banner_settings['banner_subtitle'] : 'for any job, Online';
+        $banner_subtitle  = !empty($banner_settings) && !empty($banner_settings['banner_subtitle']) ? $banner_settings['banner_subtitle'] : '';
         $banner_description  = !empty($banner_settings) && !empty($banner_settings['banner_description']) ? $banner_settings['banner_description'] : 'Consectetur adipisicing elit sed dotem eiusmod tempor incuntes ut labore etdolore maigna aliqua enim';
         $banner_video_link  = !empty($banner_settings) && !empty($banner_settings['video_link']) ? $banner_settings['video_link'] : 'https://www.youtube.com/watch?v=B-ph2g5o2K4';
         $banner_video_title  = !empty($banner_settings) && !empty($banner_settings['video_title']) ? $banner_settings['video_title'] : 'See For Yourself!';

@@ -35,13 +35,13 @@
                     </div>
                     <?php if($role === 'employer'): ?>
                     <?php if(Helper::getAccessType() == 'both' || Helper::getAccessType() == 'jobs'): ?>
-                        <div class="wt-btnarea"><a href="<?php echo e(url(route('employerPostJob'))); ?>" class="wt-btn"><?php echo e(trans('lang.post_job')); ?></a></div>
+                        
                     <?php else: ?>
                         <div class="wt-btnarea"><a href="<?php echo e(url(route('showUserProfile', ['slug' => Auth::user()->slug]))); ?>" class="wt-btn"><?php echo e(trans('lang.view_profile')); ?></a></div>
                     <?php endif; ?>
                     <?php elseif($role === 'freelancer'): ?>
                         <?php if(Helper::getAccessType() == 'both' || Helper::getAccessType() == 'services'): ?>
-                            <div class="wt-btnarea"><a href="<?php echo e(url(route('freelancerPostService'))); ?>" class="wt-btn"><?php echo e(trans('lang.post_service')); ?></a></div>
+                            
                         <?php else: ?>
                             <div class="wt-btnarea"><a href="<?php echo e(url(route('showUserProfile', ['slug' => Auth::user()->slug]))); ?>" class="wt-btn"><?php echo e(trans('lang.view_profile')); ?></a></div>
                         <?php endif; ?>
@@ -51,26 +51,14 @@
             <nav id="wt-navdashboard" class="wt-navdashboard">
                 <ul>
                     <?php if($role === 'admin'): ?>
+                        
                         <li>
-                            <a href="<?php echo e(route('allJobs')); ?>">
+                            <a href="<?php echo e(route('admin.posts.adminIndex')); ?>">
                                 <i class="ti-briefcase"></i>
-                                <span><?php echo e(trans('lang.all_jobs')); ?></span>
+                                <span><?php echo e(trans('lang.posts')); ?></span>
                             </a>
                         </li>
-                        <?php if(Helper::getAccessType() == 'both' || Helper::getAccessType() == 'services'): ?>
-                            <li>
-                                <a href="<?php echo e(route('allServices')); ?>">
-                                    <i class="ti-briefcase"></i>
-                                    <span><?php echo e(trans('lang.services')); ?></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?php echo e(route('ServiceOrders')); ?>">
-                                    <i class="ti-briefcase"></i>
-                                    <span><?php echo e(trans('lang.service_orders')); ?></span>
-                                </a>
-                            </li>
-                        <?php endif; ?>
+                        
                         <li>
                             <a href="<?php echo e(route('reviewOptions')); ?>">
                                 <i class="ti-check-box"></i>
@@ -139,8 +127,7 @@
                             </a>
                             <ul class="sub-menu">
                                 <li><hr><a href="<?php echo e(route('skills')); ?>"><?php echo e(trans('lang.skills')); ?></a></li>
-                                <li><hr><a href="<?php echo e(route('categories')); ?>"><?php echo e(trans('lang.job_cats')); ?></a></li>
-                                <li><hr><a href="<?php echo e(route('admin.posts.adminIndex')); ?>"><?php echo e(trans('lang.posts')); ?></a></li>
+                                <li><hr><a href="<?php echo e(route('categories')); ?>"><?php echo e(trans('lang.cats')); ?></a></li>
                                 <li><hr><a href="<?php echo e(route('departments')); ?>"><?php echo e(trans('lang.dpts')); ?></a></li>
                                 <li><hr><a href="<?php echo e(route('languages')); ?>"><?php echo e(trans('lang.langs')); ?></a></li>
                                 <li><hr><a href="<?php echo e(route('locations')); ?>"><?php echo e(trans('lang.locations')); ?></a></li>
@@ -175,34 +162,8 @@
                             </ul>
                         </li>
                         <?php if($role === 'employer'): ?>
-                            <?php if(Helper::getAccessType() == 'both' || Helper::getAccessType() == 'jobs'): ?>
-                                <li class="menu-item-has-children">
-                                    <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
-                                    <a href="javascript:void(0)">
-                                        <i class="ti-announcement"></i>
-                                        <span><?php echo e(trans('lang.jobs')); ?></span>
-                                    </a>
-                                    <ul class="sub-menu">
-                                        <li><hr><a href="<?php echo e(route('employerManageJobs')); ?>"><?php echo e(trans('lang.manage_job')); ?></a></li>
-                                        <li><hr><a href="<?php echo e(url('employer/jobs/completed')); ?>"><?php echo e(trans('lang.completed_jobs')); ?></a></li>
-                                        <li><hr><a href="<?php echo e(url('employer/jobs/hired')); ?>"><?php echo e(trans('lang.ongoing_jobs')); ?></a></li>
-                                    </ul>
-                                </li>
-                            <?php endif; ?>
-                            <?php if(Helper::getAccessType() == 'both' || Helper::getAccessType() == 'services'): ?>
-                                <li class="menu-item-has-children">
-                                    <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
-                                    <a href="javascript:void(0)">
-                                        <i class="ti-briefcase"></i>
-                                        <span><?php echo e(trans('lang.manage_services')); ?></span>
-                                    </a>
-                                    <ul class="sub-menu">
-                                        <li><hr><a href="<?php echo e(url('employer/services/hired')); ?>"><?php echo e(trans('lang.ongoing_services')); ?></a></li>
-                                        <li><hr><a href="<?php echo e(url('employer/services/completed')); ?>"><?php echo e(trans('lang.completed_services')); ?></a></li>
-                                        <li><hr><a href="<?php echo e(url('employer/services/cancelled')); ?>"><?php echo e(trans('lang.cancelled_services')); ?></a></li>
-                                    </ul>
-                                </li>
-                            <?php endif; ?>
+                            
+                            
                             <li>
                                 <a href="<?php echo e(route('employerPayoutsSettings')); ?>">
                                     <i class="ti-money"></i>
@@ -231,33 +192,8 @@
                                 </li>
                             <?php endif; ?>
                         <?php elseif($role === 'freelancer'): ?>
-                            <li class="menu-item-has-children">
-                                <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
-                                <a href="javascript:void(0)">
-                                    <i class="ti-briefcase"></i>
-                                    <span><?php echo e(trans('lang.all_projects')); ?></span>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li><hr><a href="<?php echo e(url('freelancer/jobs/completed')); ?>"><?php echo e(trans('lang.completed_projects')); ?></a></li>
-                                    <li><hr><a href="<?php echo e(url('freelancer/jobs/cancelled')); ?>"><?php echo e(trans('lang.cancelled_projects')); ?></a></li>
-                                    <li><hr><a href="<?php echo e(url('freelancer/jobs/hired')); ?>"><?php echo e(trans('lang.ongoing_projects')); ?></a></li>
-                                </ul>
-                            </li>
-                            <?php if(Helper::getAccessType() == 'both' || Helper::getAccessType() == 'services'): ?>
-                                <li class="menu-item-has-children">
-                                    <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
-                                    <a href="javascript:void(0)">
-                                        <i class="ti-briefcase"></i>
-                                        <span><?php echo e(trans('lang.manage_services')); ?></span>
-                                    </a>
-                                    <ul class="sub-menu">
-                                        <li><hr><a href="<?php echo e(route('ServiceListing', ['status'=>'posted'])); ?>"><?php echo e(trans('lang.posted_services')); ?></a></li>
-                                        <li><hr><a href="<?php echo e(route('ServiceListing', ['status'=>'hired'])); ?>"><?php echo e(trans('lang.ongoing_services')); ?></a></li>
-                                        <li><hr><a href="<?php echo e(route('ServiceListing', ['status'=>'completed'])); ?>"><?php echo e(trans('lang.completed_services')); ?></a></li>
-                                        <li><hr><a href="<?php echo e(route('ServiceListing', ['status'=>'cancelled'])); ?>"><?php echo e(trans('lang.cancelled_services')); ?></a></li>
-                                    </ul>
-                                </li>
-                            <?php endif; ?>
+                            
+                            
                             <li>
                                 <a href="<?php echo e(route('showFreelancerProposals')); ?>">
                                     <i class="ti-bookmark-alt"></i>

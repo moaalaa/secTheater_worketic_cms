@@ -24,8 +24,8 @@
                         :placeholder="'{{ trans('lang.looking_for') }}'"
                         :freelancer_placeholder="'{{ trans('lang.search_filter_list.freelancer') }}'"
                         :employer_placeholder="'{{ trans('lang.search_filter_list.employers') }}'"
-                        :job_placeholder="'{{ trans('lang.search_filter_list.jobs') }}'"
-                        :service_placeholder="'{{ trans('lang.search_filter_list.services') }}'"
+                        {{-- :job_placeholder="'{{ trans('lang.search_filter_list.jobs') }}'"
+                        :service_placeholder="'{{ trans('lang.search_filter_list.services') }}'" --}}
                         :no_record_message="'{{ trans('lang.no_record') }}'"
                         >
                         </search-form>
@@ -73,7 +73,12 @@
                                             {{{ trans('lang.view_employers') }}}
                                         </a>
                                     </li>
-                                @if ($type =='jobs' || $type == 'both')
+                                    <li>
+                                        <a href="{{ route('posts.index') }}">
+                                            {{{ trans('lang.posts') }}}
+                                        </a>
+                                    </li>
+                                {{-- @if ($type =='jobs' || $type == 'both')
                                         <li>
                                             <a href="{{url('search-results?type=job')}}">
                                                 {{{ trans('lang.browse_jobs') }}}
@@ -86,7 +91,7 @@
                                             {{{ trans('lang.browse_services') }}}
                                         </a>
                                     </li>
-                                @endif
+                                @endif --}}
                                 </ul>
                             </div>
                         </nav>
