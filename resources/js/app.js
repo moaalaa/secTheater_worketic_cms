@@ -72,7 +72,6 @@ Vue.prototype.$signedIn = window.App.signedIn;
 // ---------------------------  Posts -----------------------------
 
 Vue.component('comments-list', require('./components/Posts/CommentsListComponent.vue').default);
-Vue.component('comment-item', require('./components/Posts/CommentsItemComponent.vue').default);
 Vue.component('new-comment', require('./components/Posts/NewCommentComponent.vue').default);
 
 // --------------------------- End Posts --------------------------

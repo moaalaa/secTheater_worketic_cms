@@ -3,7 +3,7 @@
         <!-- Card Edit -->
         <div class="card mb-4"  v-if="editing">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <div v-text="commentItem.creator.first_name"></div>
+                <div v-text="commentItem.creator.first_name + ' ' + trans('lang.comment')"></div>
                 <div v-text="ago"></div>
             </div>
 
@@ -22,7 +22,7 @@
         <!-- Card View -->
         <div class="card mb-4" v-else>
             <div class="card-header d-flex justify-content-between align-items-center">
-                <div v-text="commentItem.creator.first_name"></div>
+                <div v-text="commentItem.creator.first_name + ' ' + trans('lang.comment')"></div>
                 <div v-text="ago"></div>
             </div>
 
@@ -30,8 +30,8 @@
                 <p class="card-text" v-text="commentItem.body"></p>
             </div>
             
-            <div class="card-footer d-flex justify-content-between align-items-center">
-                <button class="btn btn-success">Reply</button>
+            <div v-if="$signedIn" class="card-footer d-flex justify-content-between align-items-center">
+                <button @click.prevent="reply" class="btn btn-success" v-text="trans('lang.reply')"></button>
                 
                 <div v-if="$authorize('owns', commentItem)">
                     <button @click.prevent="edit" class="btn btn-primary" v-text="trans('lang.edit')"></button>
@@ -40,14 +40,23 @@
             </div>
         </div>
 
+        <new-reply v-if="startReply && $signedIn" :comment="commentItem"></new-reply>
+        <replies-list :comment="commentItem" :replies="commentItem.replies"></replies-list>
+
     </div>
 </template>
 
 <script>
 import moment from 'moment';
+import RepliesList from "./RepliesListComponent";
+import NewReply from "./NewReplyComponent";
 
 export default {
     props: ['comment', 'post'],
+    components: {
+        RepliesList,
+        NewReply,
+    },
     data() {
         return {
             commentItem: this.comment,
@@ -55,6 +64,7 @@ export default {
             editDisabled: false,
             editing: false,
             body: '',
+            startReply: false,
             toasterOptions: {
                 position: "topRight",
                 timeout: 4000
@@ -74,9 +84,6 @@ export default {
         editState() {
             return this.editDisabled ? 'updating...' : this.trans('lang.update');
         }
-    },
-    mounted() {
-        
     },
     methods: {
         showSuccess(message){
@@ -133,6 +140,9 @@ export default {
 
                     this.disabled = false;
                 });
+        },
+        reply() {
+            this.startReply = true;
         }
     }
 }

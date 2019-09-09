@@ -107,6 +107,11 @@ Route::post('/posts/{post}/comment', 'CommentsController@comment')->name('commen
 Route::patch('/posts/{post}/comments/{comment}', 'CommentsController@update')->name('comments.update');
 Route::delete('/posts/{post}/comments/{comment}', 'CommentsController@destroy')->name('comments.destroy');
 
+// Replies Routes
+Route::post('/comments/{comment}/reply', 'RepliesController@reply')->name('replies.store');
+Route::patch('/comments/{comment}/replies/{reply}', 'RepliesController@update')->name('replies.update');
+Route::delete('/comments/{comment}/replies/{reply}', 'RepliesController@destroy')->name('replies.destroy');
+
 // ------------ Posts --------------
 
 

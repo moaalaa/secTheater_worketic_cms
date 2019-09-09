@@ -35,6 +35,7 @@
         <div class="container">
             <div class="row">
                 
+                <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 mb-4"></div>
                 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 mb-4">
                     <div class="card">
                         <img src="{{ $post->imagePath }}" class="card-img-top" alt="{{ $post->title }}">
@@ -45,11 +46,14 @@
                     </div>
                 </div>
                 
-
+                <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 mb-4"></div>
+                
+                <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 mb-4"></div>
                 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 mb-4">
                     <comments-list class="mb-5" :post="{{ $post }}" :comments="{{ $post->comments }}"></comments-list>
 
-                    <new-comment test="test" :post="{{ $post }}"></new-comment>
+                    <new-comment test="test" :post="{{ $post }}" v-if="$signedIn"></new-comment>
+                    <div class="alert alert-success" v-else>You Must Be LoggedIn To Join Post Discussion</div>
 
                 </div>
                 

@@ -5,8 +5,13 @@
 </template>
 
 <script>
+import CommentItem from './CommentsItemComponent';
+
 export default {
     props: ['comments', 'post'],
+    components: {
+        CommentItem,
+    },
     data() {
         return {
             commentsList: this.comments,
@@ -18,8 +23,6 @@ export default {
     },
     methods: {
         addNewComment(comment) {
-            console.log('hay');
-            
             this.commentsList.push(comment);
         },
         removeComment(removedComment) {
