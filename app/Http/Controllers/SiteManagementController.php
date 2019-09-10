@@ -108,7 +108,7 @@ class SiteManagementController extends Controller
         $menu_pages_1 = !empty($footer_settings['menu_pages_1']) ? $footer_settings['menu_pages_1'] : array();
         $menu_title_1 = !empty($footer_settings['menu_title_1']) ? $footer_settings['menu_title_1'] : '';
         $menu_title_2 = !empty($footer_settings['menu_title_2']) ? $footer_settings['menu_title_2'] : '';
-        $pages = Page::select('title', 'id')->get()->pluck('title', 'id');
+        // $pages = Page::select('title', 'id')->get()->pluck('title', 'id');
         $social_list = Helper::getSocialData();
         $social_unserialize_array = SiteManagement::getMetaValue('socials');
         $unserialize_menu_array = SiteManagement::getMetaValue('search_menu');
@@ -193,7 +193,7 @@ class SiteManagementController extends Controller
                     'sender_avatar', 'title', 'email', 'logo', 'commision',
                     'existing_payment_settings', 'connects_per_job', 'footer_logo',
                     'footer_desc', 'social_list', 'social_unserialize_array',
-                    'footer_copyright', 'pages', 'menu_pages', 'menu_pages_1',
+                    'footer_copyright', 'menu_pages', 'menu_pages_1',
                     'unserialize_menu_array', 'menu_title_1', 'menu_title_2', 'menu_title',
                     'client_id', 'payment_password', 'existing_payment_secret',
                     'currency', 'existing_currency', 'gmap_api_key', 'min_payout',

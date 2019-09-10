@@ -48,6 +48,7 @@ class PostsController extends Controller
         ]);
 
         $validated['image'] = $request->hasFile('image') ? $request->file('image')->store(Post::IMAGE_DIRECTORY_NAME) : null;
+        $validated['creator_id'] = auth()->id();
 
         Post::create($validated);
         

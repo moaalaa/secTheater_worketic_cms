@@ -1,9 +1,9 @@
-@extends(file_exists(resource_path('views/extend/front-end/master.blade.php')) ? 'extend.front-end.master' : 'front-end.master')
+@extends('front-end.master')
 @section('content')
 @php
-    $employees      = Helper::getEmployeesList();
-    $departments    = App\Department::all();
-    $locations      = App\Location::select('title', 'id')->get()->pluck('title', 'id')->toArray();
+
+
+
     $roles          = Spatie\Permission\Models\Role::all()->toArray();
     $register_form = App\SiteManagement::getMetaValue('reg_form_settings');
     $reg_one_title = !empty($register_form) && !empty($register_form[0]['step1-title']) ? $register_form[0]['step1-title'] : trans('lang.join_for_good');
@@ -138,65 +138,6 @@
                                             </span>
                                         </div>
                                     </fieldset>
-                                    <fieldset class="wt-formregisterstart">
-                                        <div class="wt-title wt-formtitle">
-                                            <h4>{{{ trans('lang.start_as') }}}</h4>
-                                        </div>
-                                        @if(!empty($roles))
-                                            <ul class="wt-accordionhold wt-formaccordionhold accordion">
-                                                @foreach ($roles as $key => $role)
-                                                    @if (!in_array($role['id'] == 1, $roles))
-                                                        <li>
-                                                            <div class="wt-accordiontitle" id="headingOne" data-toggle="collapse" data-target="#collapseOne">
-                                                                <span class="wt-radio">
-                                                                <input id="wt-company-{{$key}}" type="radio" name="role" value="{{{ $role['role_type'] }}}" checked="" v-model="user_role" v-on:change="selectedRole(user_role)">
-                                                                <label for="wt-company-{{$key}}">
-                                                                    {{ $role['name'] === 'freelancer' ? trans('lang.freelancer') : trans('lang.employer')}}
-                                                                    <span> 
-                                                                        ({{ $role['name'] === 'freelancer' ? trans('lang.signup_as_freelancer') : trans('lang.signup_as_country')}})
-                                                                    </span>
-                                                                </label>
-                                                                </span>
-                                                            </div>
-                                                            @if ($role['role_type'] === 'employer')
-                                                                @if ($show_emplyr_inn_sec === 'true')
-                                                                    <div class="wt-accordiondetails collapse show" id="collapseOne" aria-labelledby="headingOne" v-if="is_show">
-                                                                        <div class="wt-radioboxholder">
-                                                                            <div class="wt-title">
-                                                                                <h4>{{{ trans('lang.no_of_employees') }}}</h4>
-                                                                            </div>
-                                                                            @foreach ($employees as $key => $employee)
-                                                                                <span class="wt-radio">
-                                                                                    <input id="wt-just-{{{$key}}}" type="radio" name="employees" value="{{{$employee['value']}}}" checked="">
-                                                                                    <label for="wt-just-{{{$key}}}">{{{$employee['title']}}}</label>
-                                                                                </span>
-                                                                            @endforeach
-                                                                        </div>
-                                                                        @if ($departments->count() > 0)
-                                                                            <div class="wt-radioboxholder">
-                                                                                <div class="wt-title">
-                                                                                    <h4>{{{ trans('lang.your_department') }}}</h4>
-                                                                                </div>
-                                                                                @foreach ($departments as $key => $department)
-                                                                                    <span class="wt-radio">
-                                                                                        <input id="wt-department-{{{$department->id}}}" type="radio" name="department" value="{{{$department->id}}}" checked="">
-                                                                                        <label for="wt-department-{{{$department->id}}}">{{{$department->title}}}</label>
-                                                                                    </span>
-                                                                                @endforeach
-                                                                            </div>
-                                                                            <div class="form-group wt-othersearch d-none">
-                                                                                <input type="text" name="department_name" class="form-control" placeholder="{{{ trans('lang.enter_department') }}}">
-                                                                            </div>
-                                                                        @endif
-                                                                    </div>
-                                                                @endif    
-                                                            @endif
-                                                        </li>
-                                                    @endif
-                                                @endforeach
-                                            </ul>
-                                        @endif
-                                    </fieldset>
                                     <fieldset class="wt-termsconditions">
                                         <div class="wt-checkboxholder">
                                             <span class="wt-checkbox">
@@ -212,7 +153,7 @@
                                     </fieldset>
                                 </div>
                             </form>
-                            <div class="wt-joinformc" v-if="step === 3" v-cloak>
+                            {{-- <div class="wt-joinformc" v-if="step === 3" v-cloak>
                                 <form method="POST" action="" class="wt-formtheme wt-formregister" id="verification_form">
                                     <div class="wt-registerhead">
                                         <div class="wt-title">
@@ -252,8 +193,8 @@
                                         </div>
                                     </fieldset>
                                 </form>
-                            </div>
-                            <div class="wt-gotodashboard" v-if="step === 4" v-cloak>
+                            </div> --}}
+                            <div class="wt-gotodashboard" v-if="step === 3" v-cloak>
                                 <ul class="wt-joinsteps">
                                     <li class="wt-done-next"><a href="javascrip:void(0);"><i class="fa fa-check"></i></a></li>
                                     <li class="wt-done-next"><a href="javascrip:void(0);"><i class="fa fa-check"></i></a></li>
@@ -268,7 +209,7 @@
                                         <p>{{{ $reg_four_subtitle }}}</p>
                                     </div>
                                 </div>
-                                <a href="#" class="wt-btn" @click.prevent="loginRegisterUser()">{{{ trans('lang.goto_dashboard') }}}</a>
+                                <a href="#" class="wt-btn" @click.prevent="loginRegisterUser()">{{{ trans('lang.login') }}}</a>
                             </div>
                         </div>
                     </div>

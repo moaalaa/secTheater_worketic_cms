@@ -1,6 +1,6 @@
 <template>
     <div class="ml-5">
-        <reply-item v-for="reply in repliesList" :key="reply.id" :reply="reply" :comment="comment"></reply-item>
+        <reply-item v-for="reply in repliesList" :key="reply.id" :reply="reply" :comment="comment" :post="post"></reply-item>
     </div>
 </template>
 
@@ -8,7 +8,7 @@
 import ReplyItem from './ReplyItemComponent';
 
 export default {
-    props: ['replies', 'comment'],
+    props: ['replies', 'comment', 'post'],
     components: {
         ReplyItem,
     },

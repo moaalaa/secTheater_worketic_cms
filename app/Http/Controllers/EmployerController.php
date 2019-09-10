@@ -52,20 +52,20 @@ class EmployerController extends Controller
      * Defining scope of the variable
      *
      * @access protected
-     * @var    array $employer
+     * @var    array $user
      */
-    protected $employer;
+    protected $user;
 
     /**
      * Create a new controller instance.
      *
-     * @param instance $employer instance
+     * @param instance $user instance
      *
      * @return void
      */
-    public function __construct(Profile $employer)
+    public function __construct(Profile $user)
     {
-        $this->employer = $employer;
+        $this->user = $user;
     }
 
     /**
@@ -75,74 +75,9 @@ class EmployerController extends Controller
      */
     public function index()
     {
-        $profile = $this->employer::where('user_id', Auth::user()->id)
-            ->get()->first();
-        $employees = Helper::getEmployeesList();
-        $departments = Department::all();
-        $locations = Location::pluck('title', 'id');
-        $gender = !empty($profile->gender) ? $profile->gender : '';
-        $tagline = !empty($profile->tagline) ? $profile->tagline : '';
-        $description = !empty($profile->description) ? $profile->description : '';
-        $banner = !empty($profile->banner) ? $profile->banner : '';
-        $avater = !empty($profile->avater) ? $profile->avater : '';
-        $address = !empty($profile->address) ? $profile->address : '';
-        $longitude = !empty($profile->longitude) ? $profile->longitude : '';
-        $latitude = !empty($profile->latitude) ? $profile->latitude : '';
-        $no_of_employees = !empty($profile->no_of_employees) ? $profile->no_of_employees : '';
-        $department_id = !empty($profile->department_id) ? $profile->department_id : '';
-        $payout_id = !empty($profile->payout_id) ? $profile->payout_id : '';
-        $packages = DB::table('items')->where('subscriber', Auth::user()->id)->count();
-        $package_options = Package::select('options')->where('role_id', Auth::user()->id)->first();
-        $options = !empty($package_options) ? unserialize($package_options['options']) : array();
-        $register_form = SiteManagement::getMetaValue('reg_form_settings');
-        $show_emplyr_inn_sec = !empty($register_form) && !empty($register_form[0]['show_emplyr_inn_sec']) ? $register_form[0]['show_emplyr_inn_sec'] : 'true';
-        if (file_exists(resource_path('views/extend/back-end/employer/profile-settings/personal-detail/index.blade.php'))) {
-            return view(
-                'extend.back-end.employer.profile-settings.personal-detail.index',
-                compact(
-                    'payout_id',
-                    'employees',
-                    'departments',
-                    'locations',
-                    'gender',
-                    'tagline',
-                    'description',
-                    'banner',
-                    'avater',
-                    'address',
-                    'longitude',
-                    'latitude',
-                    'no_of_employees',
-                    'department_id',
-                    'options',
-                    'packages',
-                    'show_emplyr_inn_sec'
-                )
-            );
-        } else {
-            return view(
-                'back-end.employer.profile-settings.personal-detail.index',
-                compact(
-                    'payout_id',
-                    'employees',
-                    'departments',
-                    'locations',
-                    'gender',
-                    'tagline',
-                    'description',
-                    'banner',
-                    'avater',
-                    'address',
-                    'longitude',
-                    'latitude',
-                    'no_of_employees',
-                    'department_id',
-                    'options',
-                    'packages',
-                    'show_emplyr_inn_sec'
-                )
-            );
-        }
+        
+        
+        
     }
 
 
@@ -200,7 +135,7 @@ class EmployerController extends Controller
         );
         if (!empty($request)) {
             $user_id = Auth::user()->id;
-            $this->employer->storeProfile($request, $user_id);
+            $this->user->storeProfile($request, $user_id);
             $json['type'] = 'success';
             $json['process'] = trans('lang.saving_profile');
             return $json;
@@ -212,21 +147,21 @@ class EmployerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function employerDashboard()
+    public function userDashboard()
     {
         if (Auth::user()) {
             $ongoing_jobs = array();
-            $employer_id = Auth::user()->id;
-            $package_item = Item::where('subscriber', $employer_id)->first();
+            $user_id = Auth::user()->id;
+            $package_item = Item::where('subscriber', $user_id)->first();
             $package = !empty($package_item) ? Package::find($package_item->product_id) : array();
             $option = !empty($package) && !empty($package['options']) ? unserialize($package['options']) : '';
             $expiry = !empty($option) && !empty($package_item) ? $package_item->updated_at->addDays($option['duration']) : '';
             $expiry_date = !empty($expiry) ? Carbon::parse($expiry)->toDateTimeString() : '';
-            $message_status = Message::where('status', 0)->where('receiver_id', $employer_id)->count();
+            $message_status = Message::where('status', 0)->where('receiver_id', $user_id)->count();
             $notify_class = $message_status > 0 ? 'wt-insightnoticon' : '';
             $currency   = SiteManagement::getMetaValue('commision');
             $symbol = !empty($currency) && !empty($currency[0]['currency']) ? Helper::currencyList($currency[0]['currency']) : array();
-            $enable_package = !empty($currency) && !empty($currency[0]['employer_package']) ? $currency[0]['employer_package'] : 'true';
+            $enable_package = !empty($currency) && !empty($currency[0]['user_package']) ? $currency[0]['user_package'] : 'true';
             $icons  = SiteManagement::getMetaValue('icons');
             $latest_proposals_icon = !empty($icons['hidden_latest_proposal']) ? $icons['hidden_latest_proposal'] : 'img-20.png';
             $latest_package_expiry_icon = !empty($icons['hidden_package_expiry']) ? $icons['hidden_package_expiry'] : 'img-21.png';
@@ -241,9 +176,9 @@ class EmployerController extends Controller
             $completed_services_icon = !empty($icons['hidden_completed_services']) ? $icons['hidden_completed_services'] : 'completed-task.png';
             $ongoing_services_icon = !empty($icons['hidden_ongoing_services']) ? $icons['hidden_ongoing_services'] : 'onservice.png';
             $access_type = Helper::getAccessType();
-            if (file_exists(resource_path('views/extend/back-end/employer/dashboard.blade.php'))) {
+            if (file_exists(resource_path('views/extend/back-end/user/dashboard.blade.php'))) {
                 return view(
-                    'extend.back-end.employer.dashboard',
+                    'extend.back-end.user.dashboard',
                     compact(
                         'access_type',
                         'ongoing_jobs',
@@ -267,7 +202,7 @@ class EmployerController extends Controller
                 );
             } else {
                 return view(
-                    'back-end.employer.dashboard',
+                    'back-end.user.dashboard',
                     compact(
                         'access_type',
                         'ongoing_jobs',
@@ -303,17 +238,17 @@ class EmployerController extends Controller
     public function showEmployerJobs($status)
     {
         $ongoing_jobs = array();
-        $employer_id = Auth::user()->id;
+        $user_id = Auth::user()->id;
         if (Auth::user()) {
-            $ongoing_jobs = Job::where('user_id', $employer_id)->latest()->where('status', 'hired')->paginate(7);
-            $completed_jobs = Job::where('user_id', $employer_id)->latest()->where('status', 'completed')->paginate(7);
-            $cancelled_jobs = Job::where('user_id', $employer_id)->latest()->where('status', 'cancelled')->paginate(7);
+            $ongoing_jobs = Job::where('user_id', $user_id)->latest()->where('status', 'hired')->paginate(7);
+            $completed_jobs = Job::where('user_id', $user_id)->latest()->where('status', 'completed')->paginate(7);
+            $cancelled_jobs = Job::where('user_id', $user_id)->latest()->where('status', 'cancelled')->paginate(7);
             $currency   = SiteManagement::getMetaValue('commision');
             $symbol = !empty($currency) && !empty($currency[0]['currency']) ? Helper::currencyList($currency[0]['currency']) : array();
             if (!empty($status) && $status === 'hired') {
-                if (file_exists(resource_path('views/extend/back-end/employer/jobs/ongoing.blade.php'))) {
+                if (file_exists(resource_path('views/extend/back-end/user/jobs/ongoing.blade.php'))) {
                     return view(
-                        'extend.back-end.employer.jobs.ongoing',
+                        'extend.back-end.user.jobs.ongoing',
                         compact(
                             'ongoing_jobs',
                             'symbol'
@@ -321,7 +256,7 @@ class EmployerController extends Controller
                     );
                 } else {
                     return view(
-                        'back-end.employer.jobs.ongoing',
+                        'back-end.user.jobs.ongoing',
                         compact(
                             'ongoing_jobs',
                             'symbol'
@@ -329,9 +264,9 @@ class EmployerController extends Controller
                     );
                 }
             } elseif (!empty($status) && $status === 'completed') {
-                if (file_exists(resource_path('views/extend/back-end/employer/jobs/completed.blade.php'))) {
+                if (file_exists(resource_path('views/extend/back-end/user/jobs/completed.blade.php'))) {
                     return view(
-                        'extend.back-end.employer.jobs.completed',
+                        'extend.back-end.user.jobs.completed',
                         compact(
                             'completed_jobs',
                             'symbol'
@@ -339,7 +274,7 @@ class EmployerController extends Controller
                     );
                 } else {
                     return view(
-                        'back-end.employer.jobs.completed',
+                        'back-end.user.jobs.completed',
                         compact(
                             'completed_jobs',
                             'symbol'
@@ -360,16 +295,16 @@ class EmployerController extends Controller
     public function showEmployerServices($status)
     {
         $ongoing_jobs = array();
-        $employer_id = Auth::user()->id;
+        $user_id = Auth::user()->id;
         if (Auth::user()) {
-            $employer = User::find($employer_id);
+            $user = User::find($user_id);
             $currency   = SiteManagement::getMetaValue('commision');
             $symbol = !empty($currency) && !empty($currency[0]['currency']) ? Helper::currencyList($currency[0]['currency']) : array();
             if (!empty($status) && $status === 'hired') {
-                $services = $employer->purchasedServices;
-                if (file_exists(resource_path('views/extend/back-end/employer/services/ongoing.blade.php'))) {
+                $services = $user->purchasedServices;
+                if (file_exists(resource_path('views/extend/back-end/user/services/ongoing.blade.php'))) {
                     return view(
-                        'extend.back-end.employer.services.ongoing',
+                        'extend.back-end.user.services.ongoing',
                         compact(
                             'services',
                             'symbol'
@@ -377,7 +312,7 @@ class EmployerController extends Controller
                     );
                 } else {
                     return view(
-                        'back-end.employer.services.ongoing',
+                        'back-end.user.services.ongoing',
                         compact(
                             'services',
                             'symbol'
@@ -385,10 +320,10 @@ class EmployerController extends Controller
                     );
                 }
             } elseif (!empty($status) && $status === 'completed') {
-                $services = $employer->completedServices;
-                if (file_exists(resource_path('views/extend/back-end/employer/services/completed.blade.php'))) {
+                $services = $user->completedServices;
+                if (file_exists(resource_path('views/extend/back-end/user/services/completed.blade.php'))) {
                     return view(
-                        'extend.back-end.employer.services.completed',
+                        'extend.back-end.user.services.completed',
                         compact(
                             'services',
                             'symbol'
@@ -396,7 +331,7 @@ class EmployerController extends Controller
                     );
                 } else {
                     return view(
-                        'back-end.employer.services.completed',
+                        'back-end.user.services.completed',
                         compact(
                             'services',
                             'symbol'
@@ -404,10 +339,10 @@ class EmployerController extends Controller
                     );
                 }
             } elseif (!empty($status) && $status === 'cancelled') {
-                $services = $employer->cancelledServices;
-                if (file_exists(resource_path('views/extend/back-end/employer/services/cancelled.blade.php'))) {
+                $services = $user->cancelledServices;
+                if (file_exists(resource_path('views/extend/back-end/user/services/cancelled.blade.php'))) {
                     return view(
-                        'extend.back-end.employer.services.cancelled',
+                        'extend.back-end.user.services.cancelled',
                         compact(
                             'services',
                             'symbol'
@@ -415,7 +350,7 @@ class EmployerController extends Controller
                     );
                 } else {
                     return view(
-                        'back-end.employer.services.cancelled',
+                        'back-end.user.services.cancelled',
                         compact(
                             'services',
                             'symbol'
@@ -454,9 +389,9 @@ class EmployerController extends Controller
             $validation_error_text = trans('lang.field_required');
             $cancel_popup_title = trans('lang.reason');
             $attachment = Helper::getUnserializeData($service->attachments);
-            if (file_exists(resource_path('views/extend/back-end/employer/services/show.blade.php'))) {
+            if (file_exists(resource_path('views/extend/back-end/user/services/show.blade.php'))) {
                 return view(
-                    'extend.back-end.employer.services.show',
+                    'extend.back-end.user.services.show',
                     compact(
                         'pivot_service',
                         'id',
@@ -476,7 +411,7 @@ class EmployerController extends Controller
                 );
             } else {
                 return view(
-                    'back-end.employer.services.show',
+                    'back-end.user.services.show',
                     compact(
                         'pivot_service',
                         'id',
@@ -507,12 +442,12 @@ class EmployerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function employerPaymentProcess($id)
+    public function userPaymentProcess($id)
     {
         if (Auth::user() && !empty($id)) {
             if (Auth::user()) {
                 $user_id = Auth::user()->id;
-                $employer = User::find($user_id);
+                $user = User::find($user_id);
                 $proposal = Proposal::where('id', $id)->get()->first();
                 $job = $proposal->job;
                 $freelancer = User::find($proposal->freelancer_id);
@@ -525,9 +460,9 @@ class EmployerController extends Controller
                 $payment_gateway = !empty($payout_settings) && !empty($payout_settings[0]['payment_method']) ? $payout_settings[0]['payment_method'] : null;
                 $currency   = SiteManagement::getMetaValue('commision');
                 $symbol = !empty($currency) && !empty($currency[0]['currency']) ? Helper::currencyList($currency[0]['currency']) : array();
-                if (file_exists(resource_path('views/extend/back-end/employer/jobs/checkout.blade.php'))) {
+                if (file_exists(resource_path('views/extend/back-end/user/jobs/checkout.blade.php'))) {
                     return view(
-                        'extend.back-end.employer.jobs.checkout',
+                        'extend.back-end.user.jobs.checkout',
                         compact(
                             'job',
                             'freelancer_name',
@@ -539,7 +474,7 @@ class EmployerController extends Controller
                     );
                 } else {
                     return view(
-                        'back-end.employer.jobs.checkout',
+                        'back-end.user.jobs.checkout',
                         compact(
                             'job',
                             'freelancer_name',
@@ -557,21 +492,21 @@ class EmployerController extends Controller
     }
 
     /**
-     * Get employer payouts.
+     * Get user payouts.
      *
      * @return \Illuminate\Http\Response
      */
     public function getPayouts()
     {
         $payouts =  Payout::where('user_id', Auth::user()->id)->paginate(10);
-        if (file_exists(resource_path('views/extend/back-end/employer/payouts.blade.php'))) {
+        if (file_exists(resource_path('views/extend/back-end/user/payouts.blade.php'))) {
             return view(
-                'extend.back-end.employer.payouts.payouts',
+                'extend.back-end.user.payouts.payouts',
                 compact('payouts')
             );
         } else {
             return view(
-                'back-end.employer.payouts.payouts',
+                'back-end.user.payouts.payouts',
                 compact('payouts')
             );
         }
@@ -588,13 +523,13 @@ class EmployerController extends Controller
             $payrols = Helper::getPayoutsList();
             $user = User::find(Auth::user()->id);
             $payout_settings = $user->profile->count() > 0 ? Helper::getUnserializeData($user->profile->payout_settings) : ''; 
-            if (file_exists(resource_path('views/extend/back-end/employer/payouts/payout_settings.blade.php'))) {
+            if (file_exists(resource_path('views/extend/back-end/user/payouts/payout_settings.blade.php'))) {
                 return view(
-                    'extend.back-end.employer.payouts.payout_settings', compact('payrols', 'payout_settings')
+                    'extend.back-end.user.payouts.payout_settings', compact('payrols', 'payout_settings')
                 );
             } else {
                 return view(
-                    'back-end.employer.payouts.payout_settings', compact('payrols', 'payout_settings')
+                    'back-end.user.payouts.payout_settings', compact('payrols', 'payout_settings')
                 );
             }
         } else {

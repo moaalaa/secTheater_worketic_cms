@@ -1365,6 +1365,41 @@ class UserController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function userProfileSettings()
+    {
+        $profile = Profile::where('user_id', Auth::user()->id)->get()->first();
+        $banner = !empty($profile->banner) ? $profile->banner : '';
+        $avater = !empty($profile->avater) ? $profile->avater : '';
+        $tagline = !empty($profile->tagline) ? $profile->tagline : '';
+        $description = !empty($profile->description) ? $profile->description : '';
+        if (file_exists(resource_path('views/extend/back-end/admin/profile-settings/personal-detail/index.blade.php'))) {
+            return view(
+                'extend.back-end.settings.index',
+                compact(
+                    'banner',
+                    'avater',
+                    'tagline',
+                    'description'
+                )
+            );
+        } else {
+            return view(
+                'back-end.settings.index',
+                compact(
+                    'banner',
+                    'avater',
+                    'tagline',
+                    'description'
+                )
+            );
+        }
+    }
+
+    /**
      * Store profile settings.
      *
      * @param \Illuminate\Http\Request $request request attributes

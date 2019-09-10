@@ -24,7 +24,7 @@ class CreatePostsTable extends Migration
                 ->references('id')
                 ->on('categories')
                 ->onDelete('set null');
-                
+            
             $table->timestamps();
         });
     }

@@ -87,19 +87,9 @@ class Profile extends Model
         if (!empty($request['email'])) {
             $user->email = filter_var($request['email'], FILTER_SANITIZE_STRING);
         }
-        $location = Location::find($request['location']);
-        $user->location()->associate($location);
+        
         $user->save();
-        $user->skills()->detach();
-        if ($request['skills']) {
-            $skills = $request['skills'];
-            $user->skills()->detach();
-            if (!empty($skills)) {
-                foreach ($skills as $skill) {
-                    $user->skills()->attach($skill['id'], ['skill_rating' => $skill['rating']]);
-                }
-            }
-        }
+        
 
         $user_profile = $this::select('id')->where('user_id', $user_id)
             ->get()->first();
@@ -110,21 +100,7 @@ class Profile extends Model
         }
 
         $profile->user()->associate($user_id);
-        $profile->freelancer_type = 'Basic';
-        $profile->hourly_rate = intval($request['hourly_rate']);
-        $profile->gender = filter_var($request['gender'], FILTER_SANITIZE_STRING);
-        $profile->tagline = filter_var($request['tagline'], FILTER_SANITIZE_STRING);
-        $profile->description = filter_var($request['description'], FILTER_SANITIZE_STRING);
-        $profile->address = filter_var($request['address'], FILTER_SANITIZE_STRING);
-        $profile->longitude = filter_var($request['longitude'], FILTER_SANITIZE_STRING);
-        $profile->latitude = filter_var($request['latitude'], FILTER_SANITIZE_STRING);
-        if ($request['employees']) {
-            $profile->no_of_employees = intval($request['employees']);
-        }
-        if ($request['department']) {
-            $department = Department::find($request['department']);
-            $profile->department()->associate($department);
-        }
+        
         $old_path = Helper::PublicPath() . '/uploads/users/temp';
         if (!empty($request['hidden_avater_image'])) {
             $filename = $request['hidden_avater_image'];

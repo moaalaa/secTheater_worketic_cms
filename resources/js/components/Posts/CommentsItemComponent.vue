@@ -33,15 +33,15 @@
             <div v-if="$signedIn" class="card-footer d-flex justify-content-between align-items-center">
                 <button @click.prevent="reply" class="btn btn-success" v-text="trans('lang.reply')"></button>
                 
-                <div v-if="$authorize('owns', commentItem)">
-                    <button @click.prevent="edit" class="btn btn-primary" v-text="trans('lang.edit')"></button>
+                <div v-if="$authorize('owns', commentItem) || $authorize('owns', post)">
+                    <button @click.prevent="edit" v-if="$authorize('owns', commentItem)" class="btn btn-primary" v-text="trans('lang.edit')"></button>
                     <button @click.prevent="remove" class="btn btn-danger" :disabled="disabled" v-text="removeState"></button>
                 </div>
             </div>
         </div>
 
         <new-reply v-if="startReply && $signedIn" :comment="commentItem"></new-reply>
-        <replies-list :comment="commentItem" :replies="commentItem.replies"></replies-list>
+        <replies-list :comment="commentItem" :replies="commentItem.replies" :post="post"></replies-list>
 
     </div>
 </template>

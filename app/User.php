@@ -55,6 +55,8 @@ class User extends Authenticatable
         'longitude', 'latitude'
     ];
 
+    protected $with = ['profile'];
+
     /**
      * For creating event.
      *
@@ -249,6 +251,11 @@ class User extends Authenticatable
         return $this->hasMany('App\item', 'subscriber');
     }
 
+    public function getFullNameAttribute()
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
+
     /**
      * Set slug before saving in DB
      *
@@ -288,15 +295,16 @@ class User extends Authenticatable
     public function storeUser($request, $verification_code)
     {
         if (!empty($request)) {
+            
             $this->first_name = filter_var($request['first_name'], FILTER_SANITIZE_STRING);
             $this->last_name = filter_var($request['last_name'], FILTER_SANITIZE_STRING);
-            $this->slug = filter_var($request['first_name'], FILTER_SANITIZE_STRING) . '-' .
-                filter_var($request['last_name'], FILTER_SANITIZE_STRING);
+            $this->slug = filter_var($request['first_name'], FILTER_SANITIZE_STRING) . '-' . filter_var($request['last_name'], FILTER_SANITIZE_STRING);
             $this->email = filter_var($request['email'], FILTER_VALIDATE_EMAIL);
             $this->password = Hash::make($request['password']);
-            $this->verification_code = $verification_code;
-            $this->user_verified = 0;
-            $this->assignRole($request['role']);
+            // $this->verification_code = $verification_code;
+            $this->user_verified = 1;
+            $this->assignRole('user');
+
             if (!empty($request['locations'])) {
                 $location = Location::find($request['locations']);
                 $this->location()->associate($location);
@@ -304,29 +312,12 @@ class User extends Authenticatable
             $this->badge_id = null;
             $this->expiry_date = null;
             $this->save();
+
             $user_id = $this->id;
             $profile = new Profile();
             $profile->user()->associate($user_id);
-            if (!empty($request['employees'])) {
-                $profile->no_of_employees = intval($request['employees']);
-            }
-            if (!empty($request['department_name'])) {
-                $department = Department::find($request['department_name']);
-                $profile->department()->associate($department);
-            }
             $profile->save();
-            $role_id = Helper::getRoleByUserID($user_id);
-            $package = Package::select('id', 'title', 'cost')->where('role_id', $role_id)->where('trial', 1)->get()->first();
-            $trial_invoice = Invoice::select('id')->where('type', 'trial')->get()->first();
-            if (!empty($package) && !empty($trial_invoice)) {
-                DB::table('items')->insert(
-                    [
-                        'invoice_id' => $trial_invoice->id, 'product_id' => $package->id, 'subscriber' => $user_id,
-                        'item_name' => $package->title, 'item_price' => $package->cost, 'item_qty' => 1,
-                        "created_at" => \Carbon\Carbon::now(), 'updated_at' => \Carbon\Carbon::now()
-                    ]
-                );
-            }
+            
             return $user_id;
         }
     }

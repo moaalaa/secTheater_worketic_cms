@@ -13,7 +13,7 @@ class Post extends Model
     
     const IMAGE_DIRECTORY_NAME = '/posts';
 
-    protected $fillable = ['title', 'body', 'slug', 'image', 'category_id'];
+    protected $fillable = ['title', 'body', 'slug', 'image', 'category_id', 'creator_id'];
 
     protected static function boot()
     {
@@ -22,6 +22,11 @@ class Post extends Model
         static::created(function ($model) {
             $model->update([ 'slug' => $model->title ]);
         });
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo('App\User', 'creator_id');
     }
 
     public function category()

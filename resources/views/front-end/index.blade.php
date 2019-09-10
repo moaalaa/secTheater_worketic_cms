@@ -1,4 +1,4 @@
-@extends(file_exists(resource_path('views/extend/front-end/master.blade.php')) ? 'extend.front-end.master' : 'front-end.master')
+@extends('front-end.master')
 @push('stylesheets')
     <link href="{{ asset('css/prettyPhoto-min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/owl.carousel.min.css') }}" rel="stylesheet">
@@ -9,13 +9,8 @@
 @section('content')
     @php
         $categories = App\Category::latest()->get()->take(8);
-        $skills = App\Skill::latest()->get()->take(8);
-        $locations = App\Location::latest()->get()->take(8);
         $languages = App\Language::latest()->get()->take(8);
-        $type = Helper::getAccessType() == 'services' ? 'service' : 'job';
-        if (Schema::hasTable('services') && Schema::hasTable('service_user')) {
-            $services = App\Service::latest()->paginate(6);
-        }
+        
     @endphp
     <div id="home" class="la-home-page">
         @if (Session::has('error'))
@@ -47,16 +42,7 @@
                                     <p>{{{ Helper::getHomeBanner('description') }}}</p>
                                 </div>
                             </div>
-                            <search-form
-                            :widget_type="'home'"
-                            :placeholder="'{{ trans('lang.looking_for') }}'"
-                            :freelancer_placeholder="'{{ trans('lang.search_filter_list.freelancer') }}'"
-                            :employer_placeholder="'{{ trans('lang.search_filter_list.employers') }}'"
-                            {{-- :job_placeholder="'{{ trans('lang.search_filter_list.jobs') }}'"
-                            :service_placeholder="'{{ trans('lang.search_filter_list.services') }}'" --}}
-                            :no_record_message="'{{ trans('lang.no_record') }}'"
-                            >
-                            </search-form>
+        
                             <div class="wt-videoholder">
                                 <div class="wt-videoshow">
                                     <a data-rel="prettyPhoto[video]" href="{{{ Helper::getHomeBanner('video_url') }}}"><i class="fa fa-play"></i></a>
@@ -258,83 +244,7 @@
                 </div>
             </section>
         @endif
-        {{-- @if ($skills->count() > 0
-            || $categories->count() > 0
-            || $locations->count() > 0
-            || $languages->count() > 0)
-            <section class="wt-haslayaout wt-main-section wt-footeraboutus">
-                <div class="container">
-                    <div class="row">
-                        @if (Helper::getAccessType() != 'services')
-                            @if ($skills->count() > 0)
-                                <div class="col-12 col-sm-6 col-md-3 col-lg-3">
-                                    <div class="wt-widgetskills">
-                                        <div class="wt-fwidgettitle">
-                                            <h3>{{ trans('lang.by_skills') }}</h3>
-                                        </div>
-                                        @if (!empty($skills))
-                                            <ul class="wt-fwidgetcontent">
-                                                @foreach ($skills as $skill)
-                                                    <li><a href="{{{url('search-results?type=job&skills%5B%5D='.$skill->slug)}}}">{{{ $skill->title }}}</a></li>
-                                                @endforeach
-                                            </ul>
-                                        @endif
-                                    </div>
-                                </div>
-                            @endif
-                        @endif
-                        @if ($categories->count() > 0)
-                            <div class="col-12 col-sm-6 col-md-3 col-lg-3">
-                                <div class="wt-footercol wt-widgetcategories">
-                                    <div class="wt-fwidgettitle">
-                                        <h3>{{ trans('lang.by_cats') }}</h3>
-                                    </div>
-                                    @if (!empty($categories))
-                                        <ul class="wt-fwidgetcontent">
-                                            @foreach ($categories as $category)
-                                                <li><a href="{{{url('search-results?type='.$type.'&category%5B%5D='.$category->slug)}}}">{{{ $category->title }}}</a></li>
-                                            @endforeach
-                                        </ul>
-                                    @endif
-                                </div>
-                            </div>
-                        @endif
-                        @if ($locations->count() > 0)
-                            <div class="col-12 col-sm-6 col-md-3 col-lg-3">
-                                <div class="wt-widgetbylocation">
-                                    <div class="wt-fwidgettitle">
-                                        <h3>{{ trans('lang.by_locs') }}</h3>
-                                    </div>
-                                    @if (!empty($locations))
-                                        <ul class="wt-fwidgetcontent">
-                                            @foreach ($locations as $location)
-                                                <li><a href="{{{url('search-results?type='.$type.'&locations%5B%5D='.$location->slug)}}}">{{{ $location->title }}}</a></li>
-                                            @endforeach
-                                        </ul>
-                                    @endif
-                                </div>
-                            </div>
-                        @endif
-                        @if ($languages->count() > 0)
-                            <div class="col-12 col-sm-6 col-md-3 col-lg-3">
-                                <div class="wt-widgetbylocation">
-                                    <div class="wt-fwidgettitle">
-                                        <h3>{{ trans('lang.by_lang') }}</h3>
-                                    </div>
-                                    @if (!empty($languages))
-                                        <ul class="wt-fwidgetcontent">
-                                            @foreach ($languages as $language)
-                                                <li><a href="{{{url('search-results?type='.$type.'&languages%5B%5D='.$language->slug)}}}">{{{ $language->title }}}</a></li>
-                                            @endforeach
-                                        </ul>
-                                    @endif
-                                </div>
-                            </div>
-                        @endif
-                    </div>
-                </div>
-            </section>
-        @endif --}}
+       
     </div>
 @endsection
 @push('scripts')

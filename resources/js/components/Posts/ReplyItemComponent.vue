@@ -30,9 +30,9 @@
                 <p class="card-text" v-text="replyItem.body"></p>
             </div>
             
-            <div v-if="($authorize('owns', replyItem) || $authorize('owns', comment)) && $signedIn">
+            <div v-if="$authorize('owns', replyItem) || $authorize('owns', comment) || $authorize('owns', post)">
                 <div class="card-footer text-right">        
-                    <button @click.prevent="edit" class="btn btn-primary" v-text="trans('lang.edit')"></button>
+                    <button @click.prevent="edit" v-if="$authorize('owns', replyItem)" class="btn btn-primary" v-text="trans('lang.edit')"></button>
                     <button @click.prevent="remove" class="btn btn-danger" :disabled="disabled" v-text="removeState"></button>
                 </div>
             </div>
@@ -45,7 +45,7 @@
 import moment from 'moment';
 
 export default {
-    props: ['reply', 'comment'],
+    props: ['reply', 'comment', 'post'],
     data() {
         return {
             replyItem: this.reply,

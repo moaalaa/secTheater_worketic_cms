@@ -1,5 +1,9 @@
 # Worketic
 
+## Table of Content
+- [Installation](#installation)
+- [Authorization](#authorization)
+
 ## Prerequisites
 > This Project Required Composer To Be Installed And PHP 7.1 Or Above
 - PHP 7.1 Or Above 
@@ -72,12 +76,21 @@ php artisan serve
 ### Login Credentials
 `Admin`
 - Email: admin@email.com
-- Password: google
+- Password: 123123
 ---
-`Employer`
-- Email: employer@email.com
-- Password: google
+`User`
+- Email: user@test.com
+- Password: 123123
 ---
-`Freelancer`
-- Email: freelancer@email.com
-- Password: google
+
+## Authorization
+- `Admin`
+    - Can Create New Post
+    - Can Edit Post
+    - Can Delete Post
+    - Can Delete Post Comments `**(Post Owner Can Delete Post Comment and Comment Owner as well)**`
+    - Can Delete Post Replies  `**(Post Owner Can Delete Post Replies and Comment Owner as well)**`
+
+- `User`
+    - Can Delete His Post Comments `**(Post Owner Can Delete Post Comment and Comment Owner as well)**`
+    - Can Delete His Post Replies `**(Post Owner Can Delete Post Replies and Comment Owner as well)**`
